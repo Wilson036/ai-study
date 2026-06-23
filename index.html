@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 應用規劃師（中級）｜科目一 互動學習</title>
+<style>
+:root{
+  --bg:#f5f7fa; --panel:#ffffff; --ink:#1f2933; --ink-soft:#52606d; --ink-mute:#7b8794;
+  --line:#e4e9f0; --line-soft:#eef2f7;
+  --primary:#2563eb; --primary-d:#1d4ed8; --primary-soft:#e8effd;
+  --teal:#0e9384; --teal-soft:#e2f5f1;
+  --amber:#d97706; --amber-soft:#fef3e2;
+  --green:#16a34a; --green-soft:#e7f6ec; --red:#dc2626; --red-soft:#fdeaea;
+  --shadow:0 1px 2px rgba(16,24,40,.04),0 4px 16px rgba(16,24,40,.06);
+  --shadow-lg:0 8px 30px rgba(16,24,40,.12);
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",
+    "Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.7;
+  -webkit-font-smoothing:antialiased; letter-spacing:.01em;
+}
+button{font-family:inherit; cursor:pointer; border:none; background:none; color:inherit}
+::selection{background:var(--primary-soft)}
+
+/* ---------- Header ---------- */
+header.top{
+  position:sticky; top:0; z-index:40;
+  background:linear-gradient(110deg,#1e3a8a 0%,#2563eb 45%,#0e9384 110%);
+  color:#fff; padding:0; box-shadow:0 2px 14px rgba(16,24,40,.16);
+}
+.top-inner{max-width:1280px; margin:0 auto; padding:14px 22px}
+.brand{display:flex; align-items:center; gap:13px}
+.logo{
+  width:42px;height:42px;border-radius:11px;flex:none;
+  background:rgba(255,255,255,.16); backdrop-filter:blur(4px);
+  display:grid;place-items:center; font-weight:800; font-size:17px; letter-spacing:-.5px;
+  border:1px solid rgba(255,255,255,.25);
+}
+.brand h1{font-size:18px; font-weight:700; letter-spacing:.02em}
+.brand p{font-size:12.5px; opacity:.86; font-weight:400; margin-top:1px}
+.tabs{display:flex; gap:6px; margin-top:14px; flex-wrap:wrap}
+.tab{
+  display:flex;align-items:center;gap:7px;
+  padding:8px 16px; border-radius:10px; font-size:14px; font-weight:600;
+  color:rgba(255,255,255,.82); background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14); transition:.16s;
+}
+.tab:hover{background:rgba(255,255,255,.18); color:#fff}
+.tab.active{background:#fff; color:var(--primary-d); border-color:#fff; box-shadow:0 3px 10px rgba(0,0,0,.12)}
+.tab .ic{font-size:15px}
+
+/* ---------- Layout ---------- */
+.wrap{max-width:1280px; margin:0 auto; padding:22px; display:grid; grid-template-columns:268px 1fr; gap:22px; align-items:start}
+aside{position:sticky; top:108px; max-height:calc(100vh - 130px); overflow:auto; display:flex; flex-direction:column; gap:14px}
+aside::-webkit-scrollbar{width:7px} aside::-webkit-scrollbar-thumb{background:#d3dae3;border-radius:8px}
+.side-card{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden}
+.side-card h3{font-size:12px; text-transform:uppercase; letter-spacing:.09em; color:var(--ink-mute); padding:14px 16px 9px; font-weight:700}
+
+/* search */
+.search-box{padding:12px}
+.search-field{position:relative}
+.search-field input{
+  width:100%; padding:11px 14px 11px 38px; border:1.5px solid var(--line); border-radius:10px;
+  font-size:14px; background:#fbfcfe; transition:.15s; color:var(--ink);
+}
+.search-field input:focus{outline:none; border-color:var(--primary); background:#fff; box-shadow:0 0 0 3px var(--primary-soft)}
+.search-field .si{position:absolute; left:13px; top:50%; transform:translateY(-50%); color:var(--ink-mute); font-size:14px}
+.search-results{margin-top:8px; display:flex; flex-direction:column; gap:4px}
+.sr-item{padding:9px 11px; border-radius:9px; cursor:pointer; border:1px solid transparent; transition:.12s}
+.sr-item:hover{background:var(--primary-soft); border-color:#d3e2fb}
+.sr-tag{font-size:11px; font-weight:700; color:var(--primary); margin-bottom:1px}
+.sr-txt{font-size:13px; color:var(--ink-soft)}
+.sr-txt b{background:#fff3bf; color:#7a5b00; padding:0 1px; border-radius:2px}
+.sr-empty{padding:8px 11px; font-size:13px; color:var(--ink-mute)}
+
+/* nav */
+.nav{padding:6px 10px 12px}
+.nav-chap{margin-top:6px}
+.nav-chap-h{display:flex; align-items:center; gap:8px; padding:8px 8px 6px; font-size:13px; font-weight:700; color:var(--ink)}
+.chap-badge{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font-size:12px;font-weight:800;color:#fff;flex:none}
+.c3{background:#2563eb}.c4{background:#0e9384}.c5{background:#7c3aed}
+.nav-sec{
+  display:flex; align-items:center; gap:9px; width:100%; text-align:left;
+  padding:8px 10px 8px 12px; border-radius:9px; font-size:13.5px; color:var(--ink-soft);
+  transition:.13s; border:1px solid transparent;
+}
+.nav-sec:hover{background:var(--line-soft); color:var(--ink)}
+.nav-sec.active{background:var(--primary-soft); color:var(--primary-d); font-weight:700; border-color:#d3e2fb}
+.nav-sec .num{font-size:12px; font-weight:700; opacity:.7; min-width:24px}
+.nav-divider{height:1px;background:var(--line-soft);margin:8px 6px}
+.side-stat{padding:11px 16px 15px; font-size:12.5px; color:var(--ink-mute)}
+.side-stat b{color:var(--ink); font-weight:700}
+
+/* ---------- Main ---------- */
+main{min-width:0}
+.panel{background:var(--panel); border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); padding:30px 34px}
+@media(max-width:560px){.panel{padding:22px 18px}}
+
+/* notes */
+.sec-head{border-bottom:1px solid var(--line-soft); padding-bottom:18px; margin-bottom:22px}
+.sec-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:var(--primary);
+  background:var(--primary-soft); padding:4px 11px; border-radius:20px; margin-bottom:11px}
+.sec-head h2{font-size:25px; font-weight:800; letter-spacing:.01em; line-height:1.35}
+.sec-summary{margin-top:13px; font-size:15px; color:var(--ink-soft); background:linear-gradient(180deg,#fbfcff,#f7faff);
+  border:1px solid var(--line-soft); border-left:4px solid var(--primary); border-radius:10px; padding:14px 17px}
+
+.block-label{display:flex;align-items:center;gap:9px;font-size:15.5px;font-weight:800;color:var(--ink);margin:28px 0 14px}
+.block-label .bar{width:4px;height:17px;border-radius:3px;background:var(--primary)}
+.block-label.teal .bar{background:var(--teal)} .block-label.amber .bar{background:var(--amber)}
+
+.kp-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+@media(max-width:760px){.kp-grid{grid-template-columns:1fr}}
+.kp{background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px 16px; transition:.15s; position:relative; overflow:hidden}
+.kp:hover{box-shadow:var(--shadow); border-color:#cdd9ea; transform:translateY(-1px)}
+.kp::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--primary);opacity:.0;transition:.15s}
+.kp:hover::before{opacity:.85}
+.kp h4{font-size:14.5px; font-weight:700; color:var(--ink); margin-bottom:5px; display:flex; gap:8px; align-items:baseline}
+.kp h4 .dot{width:6px;height:6px;border-radius:50%;background:var(--primary);flex:none;transform:translateY(-2px)}
+.kp p{font-size:13.5px; color:var(--ink-soft)}
+
+.tbl-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:12px; margin-bottom:8px}
+table.t{width:100%; border-collapse:collapse; font-size:13.5px; min-width:460px}
+table.t caption{caption-side:top; text-align:left; font-weight:700; font-size:14px; padding:12px 14px 4px; color:var(--ink)}
+table.t th{background:#f1f5fb; color:var(--ink); font-weight:700; text-align:left; padding:10px 13px; border-bottom:2px solid #dde6f2; font-size:13px; white-space:nowrap}
+table.t td{padding:9px 13px; border-bottom:1px solid var(--line-soft); color:var(--ink-soft); vertical-align:top}
+table.t tr:last-child td{border-bottom:none}
+table.t tbody tr:nth-child(even){background:#fafbfd}
+table.t tbody tr:hover{background:var(--primary-soft)}
+
+.term-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:760px){.term-grid{grid-template-columns:1fr}}
+.term{display:flex;gap:11px;background:var(--teal-soft);border:1px solid #cdeae3;border-radius:11px;padding:11px 14px}
+.term .tk{font-weight:700;color:#0b6e63;font-size:14px}
+.term .te{font-size:11.5px;color:#3f8d82;font-weight:600}
+.term .td{font-size:12.5px;color:var(--ink-soft);margin-top:2px}
+
+.sec-nav{display:flex;justify-content:space-between;gap:12px;margin-top:30px;padding-top:20px;border-top:1px solid var(--line-soft)}
+.sec-nav button{display:flex;flex-direction:column;gap:2px;padding:11px 18px;border:1px solid var(--line);border-radius:11px;background:#fff;transition:.15s;max-width:48%}
+.sec-nav button:hover:not(:disabled){border-color:var(--primary);background:var(--primary-soft);color:var(--primary-d)}
+.sec-nav button:disabled{opacity:.38;cursor:default}
+.sec-nav .lbl{font-size:11px;color:var(--ink-mute);font-weight:600}
+.sec-nav .ttl{font-size:13.5px;font-weight:700}
+.sec-nav .right{text-align:right;align-items:flex-end}
+
+/* ---------- Flashcards ---------- */
+.fc-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:20px}
+.chip-row{display:flex;gap:7px;flex-wrap:wrap}
+.chip{padding:7px 14px;border-radius:20px;font-size:13px;font-weight:600;border:1.5px solid var(--line);background:#fff;color:var(--ink-soft);transition:.14s}
+.chip:hover{border-color:var(--primary)}
+.chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.fc-tools{display:flex;gap:8px}
+.btn-ghost{padding:8px 14px;border:1.5px solid var(--line);border-radius:10px;font-size:13px;font-weight:600;background:#fff;color:var(--ink-soft);transition:.14s;display:flex;align-items:center;gap:6px}
+.btn-ghost:hover{border-color:var(--primary);color:var(--primary)}
+
+.fc-stage{perspective:1600px; margin:0 auto; max-width:620px}
+.flashcard{position:relative; width:100%; min-height:300px; cursor:pointer; transition:transform .55s cubic-bezier(.4,.2,.2,1); transform-style:preserve-3d}
+.flashcard.flip{transform:rotateY(180deg)}
+.fc-face{position:absolute; inset:0; backface-visibility:hidden; border-radius:18px; padding:32px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; box-shadow:var(--shadow-lg)}
+.fc-front{background:linear-gradient(150deg,#ffffff,#f3f7ff); border:1px solid var(--line)}
+.fc-front .meta{position:absolute;top:16px;left:18px;font-size:11.5px;font-weight:700;color:var(--primary);background:var(--primary-soft);padding:3px 10px;border-radius:14px}
+.fc-front .term-en{font-size:14px;font-weight:700;color:var(--teal);margin-bottom:8px;letter-spacing:.03em}
+.fc-front .term-zh{font-size:30px;font-weight:800;color:var(--ink);line-height:1.3}
+.fc-front .hint{position:absolute;bottom:18px;font-size:12px;color:var(--ink-mute)}
+.fc-back{background:linear-gradient(150deg,#143a63,#0e7d72); color:#fff; border:1px solid #0c5; transform:rotateY(180deg); border-color:transparent}
+.fc-back .lab{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;opacity:.7;margin-bottom:12px}
+.fc-back .def{font-size:17px;line-height:1.75;font-weight:500}
+.fc-back .src{position:absolute;bottom:18px;font-size:12px;opacity:.7}
+.fc-progress{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:22px}
+.fc-arrow{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--line);background:#fff;font-size:20px;color:var(--ink-soft);display:grid;place-items:center;transition:.15s}
+.fc-arrow:hover{border-color:var(--primary);color:var(--primary);box-shadow:var(--shadow)}
+.fc-count{font-size:15px;font-weight:700;color:var(--ink);min-width:74px;text-align:center}
+.fc-count span{color:var(--ink-mute);font-weight:500}
+.fc-mark{display:flex;gap:10px;justify-content:center;margin-top:16px}
+.mk{padding:9px 18px;border-radius:11px;font-size:13.5px;font-weight:700;transition:.14s;border:1.5px solid}
+.mk.again{color:var(--amber);border-color:#f3d9a8;background:var(--amber-soft)}
+.mk.again:hover{background:#fde9c8}
+.mk.know{color:var(--green);border-color:#bbe6c8;background:var(--green-soft)}
+.mk.know:hover{background:#d3f0db}
+.mk.on{box-shadow:0 0 0 3px rgba(0,0,0,.05)}
+.fc-bar{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:20px;max-width:620px;margin-left:auto;margin-right:auto}
+.fc-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--primary),var(--teal));border-radius:6px;transition:width .3s}
+
+/* ---------- Quiz ---------- */
+.quiz-intro{text-align:center;padding:14px 0}
+.quiz-intro h2{font-size:24px;font-weight:800;margin-bottom:8px}
+.quiz-intro p{color:var(--ink-soft);font-size:15px;max-width:560px;margin:0 auto 26px}
+.quiz-modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;max-width:760px;margin:0 auto}
+.qmode{border:1.5px solid var(--line);border-radius:15px;padding:22px 18px;text-align:left;background:#fff;transition:.16s;position:relative;overflow:hidden}
+.qmode:hover{border-color:var(--primary);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.qmode .qm-ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;font-size:20px;color:#fff;margin-bottom:13px}
+.qmode h3{font-size:16px;font-weight:800;margin-bottom:4px}
+.qmode p{font-size:13px;color:var(--ink-mute);margin:0}
+.qmode .qm-n{position:absolute;top:18px;right:18px;font-size:13px;font-weight:800;color:var(--ink-mute)}
+
+.quiz-run .q-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.q-counter{font-size:14px;font-weight:700;color:var(--ink-soft)}
+.q-chaptag{font-size:12px;font-weight:700;color:var(--primary);background:var(--primary-soft);padding:3px 11px;border-radius:14px}
+.q-bar{height:7px;background:var(--line);border-radius:6px;overflow:hidden;margin-bottom:24px}
+.q-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--primary),var(--teal));transition:width .35s;border-radius:6px}
+.q-stem{font-size:18.5px;font-weight:700;line-height:1.65;margin-bottom:20px;color:var(--ink)}
+.q-opts{display:flex;flex-direction:column;gap:11px}
+.opt{display:flex;align-items:flex-start;gap:13px;padding:15px 17px;border:1.5px solid var(--line);border-radius:13px;background:#fff;text-align:left;font-size:15px;transition:.14s;width:100%}
+.opt:hover:not(.locked){border-color:var(--primary);background:var(--primary-soft)}
+.opt .key{width:27px;height:27px;border-radius:8px;background:#eef2f7;color:var(--ink-soft);font-weight:800;font-size:13.5px;display:grid;place-items:center;flex:none;transition:.14s}
+.opt:hover:not(.locked) .key{background:var(--primary);color:#fff}
+.opt .otext{padding-top:2px;color:var(--ink)}
+.opt.locked{cursor:default}
+.opt.correct{border-color:var(--green);background:var(--green-soft)}
+.opt.correct .key{background:var(--green);color:#fff}
+.opt.wrong{border-color:var(--red);background:var(--red-soft)}
+.opt.wrong .key{background:var(--red);color:#fff}
+.opt .mark{margin-left:auto;font-size:18px;align-self:center}
+.q-explain{margin-top:20px;border-radius:13px;padding:16px 18px;font-size:14px;line-height:1.7;display:none;animation:fade .3s}
+.q-explain.show{display:block}
+.q-explain.ok{background:var(--green-soft);border:1px solid #bbe6c8}
+.q-explain.no{background:var(--amber-soft);border:1px solid #f3d9a8}
+.q-explain .eh{font-weight:800;margin-bottom:5px;display:flex;align-items:center;gap:7px}
+.q-explain.ok .eh{color:#15803d} .q-explain.no .eh{color:#b45309}
+.q-explain .et{color:var(--ink-soft)}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+.q-foot{display:flex;justify-content:space-between;align-items:center;margin-top:24px;gap:12px}
+.btn-primary{padding:12px 26px;border-radius:12px;background:var(--primary);color:#fff;font-weight:700;font-size:15px;transition:.15s;box-shadow:0 4px 12px rgba(37,99,235,.28)}
+.btn-primary:hover{background:var(--primary-d);box-shadow:0 6px 18px rgba(37,99,235,.36)}
+.btn-primary:disabled{background:#c3cfe0;box-shadow:none;cursor:default}
+.q-quit{font-size:13.5px;color:var(--ink-mute);font-weight:600}
+.q-quit:hover{color:var(--red)}
+
+/* result */
+.result{text-align:center;padding:10px 0}
+.score-ring{width:172px;height:172px;margin:6px auto 18px;position:relative}
+.score-ring svg{transform:rotate(-90deg)}
+.score-ring .pct{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.score-ring .pct b{font-size:42px;font-weight:800;line-height:1;color:var(--ink)}
+.score-ring .pct span{font-size:13px;color:var(--ink-mute);margin-top:4px}
+.result h2{font-size:23px;font-weight:800;margin-bottom:6px}
+.result .sub{color:var(--ink-soft);margin-bottom:24px}
+.result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+.review{margin-top:30px;text-align:left;border-top:1px solid var(--line-soft);padding-top:22px}
+.review h3{font-size:16px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.rv-item{border:1px solid var(--line);border-left:4px solid var(--red);border-radius:11px;padding:14px 16px;margin-bottom:11px;background:#fff}
+.rv-item.ok{border-left-color:var(--green)}
+.rv-q{font-size:14.5px;font-weight:700;margin-bottom:8px}
+.rv-line{font-size:13.5px;margin:2px 0}
+.rv-line .lk{font-weight:700}
+.rv-yours{color:var(--red)} .rv-correct{color:var(--green);font-weight:700}
+.rv-exp{font-size:13px;color:var(--ink-soft);margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+
+/* mobile */
+.menu-btn{display:none}
+.scrim{display:none}
+@media(max-width:920px){
+  .wrap{grid-template-columns:1fr; padding:16px}
+  aside{position:fixed; top:0; left:0; bottom:0; width:300px; max-height:100vh; z-index:60;
+    background:var(--bg); padding:16px; transform:translateX(-105%); transition:transform .26s; box-shadow:var(--shadow-lg)}
+  aside.open{transform:translateX(0)}
+  .scrim.show{display:block; position:fixed; inset:0; background:rgba(15,23,42,.4); z-index:55}
+  .menu-btn{display:inline-grid; place-items:center; position:fixed; left:14px; bottom:18px; z-index:50;
+    width:54px;height:54px;border-radius:50%; background:var(--primary); color:#fff; font-size:22px; box-shadow:var(--shadow-lg)}
+}
+/* phone: 三個分頁改為等寬單行分段控制 */
+@media(max-width:600px){
+  .top-inner{padding:11px 13px}
+  .brand{gap:11px}
+  .logo{width:36px;height:36px;font-size:14px;border-radius:9px}
+  .brand h1{font-size:16px}
+  .brand p{font-size:11px;line-height:1.4}
+  .tabs{margin-top:11px; gap:4px; flex-wrap:nowrap;
+    background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.16);
+    padding:4px; border-radius:13px}
+  .tab{flex:1 1 0; min-width:0; justify-content:center; gap:5px;
+    padding:10px 4px; font-size:12.5px; border-radius:10px;
+    background:transparent; border:none}
+  .tab .ic{font-size:14px}
+  .tab:hover{background:transparent; color:rgba(255,255,255,.82)}
+  .tab.active{background:#fff; color:var(--primary-d); box-shadow:0 2px 7px rgba(0,0,0,.16)}
+}
+@media(max-width:360px){
+  .tab{font-size:11.5px; gap:3px; padding:10px 2px}
+  .tab .ic{font-size:13px}
+}
+.fade-in{animation:pageIn .32s ease}
+@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.foot-note{text-align:center;font-size:12px;color:var(--ink-mute);padding:24px 0 10px;line-height:1.7}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <div class="logo">AI</div>
+      <div>
+        <h1>AI 應用規劃師（中級）</h1>
+        <p id="subtitle">科目一・人工智慧技術應用規劃　互動學習指引</p>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-mode="notes"><span class="ic">📘</span>學習筆記</button>
+      <button class="tab" data-mode="cards"><span class="ic">🃏</span>重點閃卡</button>
+      <button class="tab" data-mode="quiz"><span class="ic">✏️</span>自我測驗</button>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <aside id="aside">
+    <div class="side-card" id="searchCard">
+      <div class="search-box">
+        <div class="search-field">
+          <span class="si">🔍</span>
+          <input id="search" type="text" placeholder="搜尋重點、術語、概念…" autocomplete="off">
+        </div>
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+    <div class="side-card">
+      <h3>章節導覽</h3>
+      <div class="nav" id="nav"></div>
+      <div class="nav-divider"></div>
+      <div class="side-stat" id="sideStat"></div>
+    </div>
+  </aside>
+
+  <main id="main"></main>
+</div>
+
+<button class="menu-btn" id="menuBtn" aria-label="目錄">☰</button>
+<div class="scrim" id="scrim"></div>
+
+<script>const DATA = {"meta": {"title": "AI 應用規劃師（中級）", "subtitle": "科目一・人工智慧技術應用規劃　互動學習指引", "source": "iPAS 經濟部產業人才能力鑑定　學習指引"}, "chapters": [{"chapter": "3", "title": "AI 相關技術應用", "sections": [{"id": "3.1", "title": "自然語言處理技術與應用", "summary": "自然語言處理（NLP）旨在讓機器能理解、處理並生成人類語言，是連接人機溝通的核心橋樑。其技術歷經規則式、統計、深度學習，至今以 Transformer 為基礎的預訓練語言模型（如 BERT、GPT）為主流，並透過詞嵌入、深度神經網路與「預訓練再微調」策略大幅提升語意理解與泛化能力。NLP 廣泛應用於文字分類、情感分析、對話系統、機器翻譯與資訊抽取，但也面臨資料隱私、模型偏見、模型幻覺與語意理解限制等資料層、模型層與應用層風險。", "keypoints": [{"heading": "NLP / NLU / NLG 三層分工", "detail": "NLP 為總稱，涵蓋所有語言技術；NLU 負責「理解」輸入語意與意圖（如意圖辨識、NER、情感分析），NLG 負責「生成」自然語言（如自動摘要、回應生成）。"}, {"heading": "NLP 三大任務層次", "detail": "理解（Understand）解析語法與語意、處理（Process）將語言轉為特徵向量或語法樹等電腦可運算結構、生成（Generate）依情境產出自然流暢語句。"}, {"heading": "技術四階段演進", "detail": "從規則式（手寫語法規則）→ 統計語言模型（機率建模）→ 深度學習（RNN/LSTM/GRU 處理序列）→ 預訓練語言模型（Transformer 為基礎，預訓練＋微調）。"}, {"heading": "前處理技術", "detail": "包含分詞（Tokenization）、詞性標注（POS）、詞形還原（Lemmatization）、詞幹提取（Stemming）、停用詞移除，是 NLP 成敗的第一道防線，直接影響模型品質與效率。"}, {"heading": "詞彙向量化（文字表示學習）", "detail": "模型只能運算數字，因此需將文字轉為向量或張量；表示技術從統計法（tf-idf）演進到分布式向量（Word2Vec），再到上下文敏感的動態詞向量（BERT Embeddings）。"}, {"heading": "靜態詞嵌入", "detail": "Word2Vec（CBOW/Skip-gram）、GloVe、FastText 將語意相近的詞映射到向量空間相近位置，可進行數學運算（如 king-man+woman≈queen），但每個詞只有一個固定向量、無法處理多義詞。"}, {"heading": "語境型詞嵌入", "detail": "ELMo、BERT、GPT 等模型使詞向量隨上下文動態變化，可解決多義詞問題（如 bank 指銀行或河岸），但需高算力與記憶體。"}, {"heading": "Transformer 與自注意力機制", "detail": "2017 年 Google 提出，以 Self-Attention 同時考慮輸入序列所有詞的關聯，解決長距離依賴問題並支援全平行運算，採 Encoder-Decoder 架構，大幅提升訓練效率。"}, {"heading": "BERT vs GPT", "detail": "BERT 為雙向 Transformer 編碼器，以 MLM 與 NSP 預訓練，擅長理解類任務（問答、分類、NER）；GPT 為單向 Transformer，採自迴歸生成，擅長文本生成與對話。"}, {"heading": "Prompt-based 學習與小樣本學習", "detail": "將任務轉化為填空或問答格式，讓大型語言模型在少樣本（Few-shot）甚至零樣本（Zero-shot）條件下完成任務，無需繁重再訓練。"}, {"heading": "RAG 與 LoRA 強化技術", "detail": "RAG（檢索增強生成）結合外部知識檢索與語言生成提升準確性；LoRA（低秩自適應）添加輕量參數快速微調，大幅降低運算與儲存需求，利於邊緣部署。"}, {"heading": "主要應用情境", "detail": "文字分類（垃圾郵件、評論分類）、情感分析（輿情監控）、對話系統（任務導向／開放式）、文字生成與摘要、機器翻譯，以及 NER 與關係抽取等資訊抽取任務。"}, {"heading": "三層風險架構", "detail": "資料層（隱私、標註品質、資料偏見、授權版權）、模型層（模型偏見、公平性評估不足）、應用層（語意理解限制、部署維運、生成內容如模型幻覺）。"}, {"heading": "去識別化與匿名化", "detail": "去識別化（代碼替換、資料抽象化、遮罩）保留部分可識別性；匿名化（徹底刪除、隨機化、聚合）使資料無法再連結個體，以符合 GDPR 與《個人資料保護法》。"}], "tables": [{"title": "NLP / NLU / NLG 比較", "headers": ["項目", "縮寫", "定義", "功能說明", "代表任務"], "rows": [["自然語言處理", "NLP", "總稱", "整合所有讓機器能理解、處理、產生語言的技術", "對話系統、機器翻譯、語音助理"], ["自然語言理解", "NLU", "NLP 的「理解」階段", "理解輸入語言的語意與結構，分析使用者意圖", "意圖辨識、命名實體辨識（NER）、情感分析"], ["自然語言生成", "NLG", "NLP 的「產出」階段", "將資料或語意轉換為自然語言文字進行表達", "自動摘要、回應生成、報告撰寫"]]}, {"title": "NLP 技術演進階段概覽", "headers": ["階段", "時期", "核心方法", "代表技術／模型"], "rows": [["規則式方法（Rule-based）", "1980s–1990s", "手動設計語法規則與詞彙辭典", "ELIZA、專家系統"], ["統計語言模型（Statistical LM）", "1990s–2010", "使用大量語料訓練機率模型", "N-gram、HMM、CRF"], ["深度學習模型（Deep Learning）", "2010–2018", "使用神經網路處理語言序列", "RNN、LSTM、GRU"], ["預訓練語言模型（Pre-trained LM）", "2018–至今", "大規模語料預訓練＋下游微調", "BERT、GPT、RoBERTa、T5"]]}, {"title": "詞彙表示／詞嵌入方法比較", "headers": ["類別", "代表方法", "是否分布式", "是否語境型", "優點", "限制"], "rows": [["純離散表示", "One-hot Encoding、Bag of Words", "非分布式", "非語境型", "結構簡單、容易實作、適合入門", "向量稀疏、無語意、維度高"], ["統計型表示", "TF-IDF", "非分布式", "非語境型", "能反映詞彙重要性、實作簡單、效果穩定", "忽略上下文與語序、無法處理同義／多義詞"], ["統計共現表示", "N-grams", "有限分布性（短範圍）", "上下文敏感（短範圍）", "可表示語序與詞組共現、基礎語言模型之用", "長句效果差、資料稀疏嚴重、無法捕捉長距依賴"], ["靜態詞嵌入", "Word2Vec、GloVe、FastText", "分布式", "非語境型", "可表示語意結構、向量可運算、效能佳、訓練成本低", "每詞只有一個向量、忽略上下文語意"], ["語境型詞嵌入", "ELMo、BERT、GPT", "分布式", "動態語境型", "語意精準、支援上下文、處理同詞異義佳", "模型大、需高算力與記憶體"]]}, {"title": "傳統序列模型比較（RNN / LSTM / GRU）", "headers": ["模型", "機制特點", "優勢", "限制"], "rows": [["RNN", "基礎序列模型，每一步輸出依賴前一步狀態", "能處理時間序列與語序資訊", "訓練不穩定，梯度消失問題嚴重"], ["LSTM", "引入記憶單元與門控機制", "能捕捉長距離依賴關係，較穩定", "結構較複雜，訓練耗時"], ["GRU", "精簡版 LSTM，整合部分門控機制", "運算較快，效果接近 LSTM", "對長序列仍有限制"]]}], "terms": [{"term": "命名實體辨識", "en": "NER", "def": "辨識並標註文本中的人名、地名、組織等實體的 NLP 任務，常用於法律與醫療文本結構化。"}, {"term": "詞嵌入", "en": "Word Embedding", "def": "將每個詞彙轉換為含語意資訊的數字向量，使語意相近的詞在向量空間中相互接近。"}, {"term": "Word2Vec", "en": "Word2Vec", "def": "Google 於 2013 年提出的詞嵌入演算法，透過 CBOW 與 Skip-gram 學習詞彙與上下文關係。"}, {"term": "自注意力機制", "en": "Self-Attention", "def": "Transformer 的核心機制，讓模型處理每個詞時同時考量序列中所有其他詞的關聯，捕捉長距離依賴。"}, {"term": "Transformer", "en": "Transformer", "def": "2017 年提出、摒棄遞迴結構並以自注意力與全平行架構為核心的深度學習架構，為現代 NLP 主流基礎。"}, {"term": "遮蔽語言模型", "en": "MLM", "def": "BERT 的預訓練任務，遮蔽部分詞後讓模型預測，藉此學習雙向上下文理解能力。"}, {"term": "預訓練再微調", "en": "Pre-train and Fine-tune", "def": "先在大規模語料上通用預訓練，再針對特定下游任務微調的主流訓練策略。"}, {"term": "檢索增強生成", "en": "RAG", "def": "結合外部知識檢索與語言生成的方法，在生成過程中整合外部資料以提升準確性。"}, {"term": "低秩自適應", "en": "LoRA", "def": "對原始模型添加輕量級低秩參數進行快速微調的技術，可大幅降低運算與儲存需求。"}, {"term": "模型幻覺", "en": "Model Hallucination", "def": "生成模型產出看似流暢卻虛假、誤導或完全虛構、不基於事實的內容之現象。"}]}, {"id": "3.2", "title": "電腦視覺技術與應用", "summary": "電腦視覺（CV）是讓機器具備「看懂世界」能力的 AI 領域，能從影像或影片中擷取、辨識並解釋語意資訊以支援分析與決策。技術從早期人工設計特徵與傳統機器學習，到 2012 年 AlexNet 開啟的 CNN 深度學習革命，再到 2020 年後與生成式 AI、多模態（如 CLIP、ViT、SAM、Diffusion）融合的階段。核心任務涵蓋影像分類、物件偵測、語意／實例分割與影像生成，廣泛應用於監控安防、醫療影像、智慧製造零售與自動駕駛，並面臨資料隱私（PII）、模型偏見、資料漂移與部署維運等風險。", "keypoints": [{"heading": "CV 定義與跨領域整合", "detail": "電腦視覺是使機器具備視覺理解能力的 AI 領域，整合影像處理、模式辨識、機器學習與深度學習等技術，從靜態影像與動態影片中辨識並解釋語意。"}, {"heading": "AlexNet 與 CNN 里程碑", "detail": "2012 年 AlexNet 在 ImageNet 競賽以 CNN 大幅提升圖像分類準確度，標誌深度學習主導電腦視覺時代的來臨。"}, {"heading": "四大核心任務", "detail": "影像分類（判斷類別）、物件偵測（定位＋分類，以邊界框標示）、語意分割（逐像素分類）、實例分割（區分同類別不同實體）。"}, {"heading": "CNN 基本架構", "detail": "由卷積層（提取局部特徵生成特徵圖）、池化層（降維）、激活層（如 ReLU 引入非線性）、全連接層與輸出層（Softmax 轉類別機率）組成。"}, {"heading": "知名 CNN 架構演進", "detail": "LeNet（手寫數字）、AlexNet（ReLU＋Dropout）、VGG（深度＋3x3 小卷積核）、ResNet（殘差連接解決梯度消失，可達 152 層）。"}, {"heading": "物件偵測模型", "detail": "YOLO 為迴歸式方法、速度快適合即時；Faster R-CNN 基於 RPN 候選框、準確度高但較慢；SSD 基於多尺度特徵、速度與準確度平衡佳。"}, {"heading": "影像分割模型", "detail": "FCN 以上採樣實現像素級分類；U-Net 具對稱編解碼器與跳躍連接、專為醫療影像設計；Mask R-CNN 擴展 Faster R-CNN 加入遮罩分支實現實例分割。"}, {"heading": "IOU 評估指標", "detail": "Intersection over Union 衡量預測區域與真實標籤區域的重疊程度（交集／聯集），值介於 0 到 1，通常大於 0.5 或 0.7 視為成功預測。"}, {"heading": "多模態與生成式融合", "detail": "2020 年後 CLIP（圖文對齊）、Vision Transformer（ViT，以 Transformer 處理影像）、DALL·E／Stable Diffusion／Midjourney（文生圖）、SAM（Segment Anything Model，通用分割）改變了 CV 應用範疇。"}, {"heading": "影像標註與工具", "detail": "依任務採不同標註法：類別標籤、邊界框、像素分割、像素遮罩＋實例 ID、關鍵點、OCR；工具如 LabelImg、CVAT、Roboflow、COCO Annotator，並可用 Auto-labeling 與主動學習提升效率。"}, {"heading": "影像資料前處理", "detail": "包含尺寸處理（Resize/Padding/Cropping）、正規化、像素增強、噪聲去除、色彩空間轉換與資料擴增（Data Augmentation，對抗過擬合）。"}, {"heading": "主要應用領域", "detail": "監控安防（人臉辨識、車牌辨識 ANPR）、醫療影像（分類與分割輔助診斷）、智慧製造與零售（瑕疵偵測、顧客行為熱點圖）、自動駕駛（車道線偵測、多模態融合）。"}, {"heading": "資料隱私與合規風險", "detail": "影像常含個人識別資料（PII），人臉資料屬敏感個資，需依《個人資料保護法》與 GDPR 進行匿名化、去識別化、合法授權與資料刪除政策。"}, {"heading": "偏見與部署維運風險", "detail": "資料不平衡、標註偏誤、拍攝條件偏差會造成誤檢／漏檢；部署面臨資料漂移（Data Drift）、版本管理與算力限制，需以 MLOps、偏見診斷與容錯回退機制因應。"}], "tables": [{"title": "電腦視覺任務類型與應用", "headers": ["任務類型", "說明", "典型應用"], "rows": [["影像分類（Image Classification）", "判斷影像屬於哪一類別", "商品辨識、醫療影像診斷、社群內容分類"], ["物件偵測（Object Detection）", "辨識影像中是否存在特定物件並標示位置（通常以邊界框）", "自動駕駛、安防監控、人流偵測"], ["語意分割（Semantic Segmentation）", "將影像中每一像素標註為對應語意類別（如道路、車輛、行人）", "城市街景理解、農作物分類、醫學影像處理"], ["實例分割（Instance Segmentation）", "除語意標註外，還分辨同一類別中不同實體（如兩台車分別標註）", "自駕車多目標辨識、AR 虛實分離、精密製造檢測"], ["影像生成與合成（Image Generation & Synthesis）", "利用生成模型合成新影像，如文字描述生成圖片或風格轉換", "設計輔助、遊戲開發、風格轉換、產出訓練用資料"]]}, {"title": "電腦視覺技術演進三階段", "headers": ["階段", "時期", "技術特點", "代表技術／模型"], "rows": [["特徵工程主導", "1980s–2010", "人工設計影像特徵，傳統機器學習分類", "邊緣偵測（Canny）、特徵點（SIFT/SURF/ORB）、SVM/KNN/隨機森林"], ["CNN 革命（深度學習興起）", "2012–2020", "自動學習圖像特徵，依賴大量資料與 GPU 算力", "AlexNet、VGGNet、GoogLeNet、ResNet、YOLO、U-Net、FaceNet"], ["多模態與生成式 AI 融合", "2020–至今", "跨模態理解與創造性生成", "CLIP、Vision Transformer（ViT）、DALL·E、Stable Diffusion、Midjourney、SAM"]]}, {"title": "影像標註方式與工具", "headers": ["任務類型", "標註方式", "說明", "常用工具"], "rows": [["影像分類", "類別標籤（Label）", "為整張影像標記單一類別", "LabelImg、Label Studio"], ["物件偵測", "邊界框（Bounding Box）", "標示物件位置與類別", "CVAT、Roboflow"], ["語意分割", "每個像素分割標籤", "影像每一像素皆對應類別", "LabelMe、SuperAnnotate"], ["實例分割", "像素遮罩 + 實例 ID", "區分同類型的多個物件", "VGG Image Annotator"], ["關鍵點標注", "身體節點或特定點位座標", "常用於人體姿態估計", "COCO Annotator"], ["文字辨識（OCR）", "區塊框選 + 文字內容", "每段文字框選並輸入正確字串", "Tesseract Trainer、LabelImg OCR 模式"]]}], "terms": [{"term": "卷積神經網路", "en": "CNN", "def": "電腦視覺核心深度學習架構，透過卷積層自動學習邊緣、紋理等影像特徵，減少手動特徵設計。"}, {"term": "殘差連接", "en": "Residual Connection", "def": "ResNet 引入的結構，藉跳接解決深層網路梯度消失問題，使網路深度可達 152 層。"}, {"term": "YOLO", "en": "You Only Look Once", "def": "一種基於迴歸的物件偵測模型，同時預測邊界框與類別，速度快適合即時應用。"}, {"term": "U-Net", "en": "U-Net", "def": "具對稱編解碼器與跳躍連接的分割模型，專為醫療影像設計、適合不平衡資料集。"}, {"term": "交並比", "en": "IOU", "def": "衡量預測分割／偵測區域與真實區域重疊程度的指標，等於交集面積除以聯集面積。"}, {"term": "Vision Transformer", "en": "ViT", "def": "採用 Transformer 架構處理影像的模型，突破 CNN 在電腦視覺領域的主導地位。"}, {"term": "CLIP", "en": "Contrastive Language-Image Pre-Training", "def": "OpenAI 提出的多模態模型，將影像與文字嵌入同一語意空間以達成跨模態理解。"}, {"term": "Segment Anything Model", "en": "SAM", "def": "Meta 推出的通用影像分割模型，具高普適性與泛化能力，可處理各種未知分割任務。"}, {"term": "資料漂移", "en": "Data Drift", "def": "隨環境或攝影條件變動導致輸入資料分佈改變，可能造成已部署模型效能下降或失效。"}, {"term": "資料擴增", "en": "Data Augmentation", "def": "透過翻轉、旋轉、裁剪、色彩偏移等變換增加資料多樣性，提升泛化能力並對抗過擬合。"}]}, {"id": "3.3", "title": "生成式 AI 技術與應用", "summary": "生成式 AI（Generative AI）能根據輸入產生全新內容，與著重分類預測的鑑別式 AI（Discriminative AI）相對，其核心在於學習資料分佈並生成新樣本。技術演進歷經 VAE 初期、GAN 時代、Transformer 崛起、擴散模型與多模態、到 2023 年起的巨型模型與 Agent 化五階段，代表模型包含 GPT、GAN、VAE、Diffusion Models。應用涵蓋文本生成、圖像生成與語音合成（TTS）等，並以 BLEU、ROUGE、人工評估、MOS、WER 等指標評估，同時面臨內容真偽、智財授權、偏見放大、深偽（Deepfake）濫用與輸出不確定性等風險。", "keypoints": [{"heading": "生成式 vs 鑑別式 AI", "detail": "生成式 AI 學習資料分佈並生成新樣本（如 GPT、GAN、VAE、Diffusion）；鑑別式 AI 學習特徵以分類或預測（如 SVM、決策樹、ResNet、HMM）。"}, {"heading": "AI 四階段演進（黃仁勳）", "detail": "感知 AI（理解影像語音文字）→ 生成式 AI（產生多模態內容）→ 代理式 AI（推理計畫自動完成任務）→ 物理 AI（真實世界移動操控，如機器人與自駕車）。"}, {"heading": "技術基礎體系", "detail": "涵蓋大規模語言模型（LLM）、擴散模型（Diffusion）、對抗生成網路（GAN）、變分自編碼器（VAE），並結合提示工程、微調與少樣本學習等策略。"}, {"heading": "VAE 初期階段", "detail": "2013–2015 以編碼器-解碼器與變分自編碼器（VAE）為主，利用變分推斷從潛在分佈生成資料，但生成模糊、品質不穩、訓練難收斂。"}, {"heading": "GAN 對抗生成網路", "detail": "2014 年 Ian Goodfellow 提出，透過生成器與判別器對抗訓練生成高寫實資料；代表如 DCGAN、CycleGAN、StyleGAN，但訓練不穩定易模式崩潰（Mode Collapse）。"}, {"heading": "Transformer 崛起", "detail": "2017 年起以自注意力機制克服 RNN 長距離依賴限制、提升並行效率，催生 LLM；代表 BERT（雙向理解）、GPT（自迴歸生成）、T5（文本到文本）。"}, {"heading": "擴散模型與多模態", "detail": "2020 年起擴散模型透過逐步去噪（Denoising）從噪聲生成高品質圖像（如 DDPM、Stable Diffusion），多模態模型依賴跨模態對齊（如 CLIP 圖文對應）。"}, {"heading": "巨型模型與 Agent 化", "detail": "2023 年起參數規模破百億／千億（如 GPT-4、Claude、Gemini），結合指令微調（Instruction Tuning）、工具鏈整合與 RAG，朝自主代理人與任務導向協作演進。"}, {"heading": "文本生成工具", "detail": "代表模型／平台包含 GPT 系列、ChatGPT、Claude（Anthropic，長上下文與對齊）、Gemini（多模態），及 LLaMA、Mistral、Command-R 等開源模型。"}, {"heading": "圖像生成模型與工具", "detail": "Diffusion Models（Stable Diffusion、DALL·E 2、Imagen）、GAN（StyleGAN、BigGAN）、ControlNet／InstructPix2Pix 控制生成；工具如 Midjourney、Stable Diffusion WebUI、Adobe Firefly、Canva AI。"}, {"heading": "語音合成（TTS）", "detail": "文字轉語音技術，代表模型 Tacotron 2、FastSpeech 2（非自迴歸）、VITS（VAE＋GAN 端到端）、Whisper（語音辨識）；工具如 ElevenLabs、Azure TTS、Google Cloud TTS、Amazon Polly。"}, {"heading": "文本生成評估指標", "detail": "BLEU 計算 n-gram 詞彙重疊（含簡短懲罰）用於機器翻譯；ROUGE 強調召回率用於摘要；人工評估衡量流暢性與準確性、捕捉語意但主觀且成本高。"}, {"heading": "語音評估指標", "detail": "MOS（Mean Opinion Score）人工評估語音自然度（1-5 分）、WER（Word Error Rate）衡量內容準確性錯誤率、生成延遲影響即時應用效果。"}, {"heading": "潛在風險", "detail": "內容真偽與資訊可信度、智慧財產權與授權爭議、偏見放大與倫理風險、深偽（Deepfake）技術濫用、可控性與輸出結果不確定性。"}, {"heading": "技術發展趨勢", "detail": "多模態生成崛起、可控生成與提示工程深化、小型化與邊緣部署、模型對齊與安全防護（RLHF、紅隊測試）、法規制定與全球治理（如 EU AI Act）。"}], "tables": [{"title": "生成式 AI 與鑑別式 AI 比較", "headers": ["比較面向", "生成式 AI（Generative AI）", "鑑別式 AI（Discriminative AI）"], "rows": [["目標", "生成新的資料樣本，例如文本、圖像、音訊等", "進行分類、辨識或預測，將資料歸類或分配標籤"], ["工作方式", "學習資料的分佈並生成新的樣本", "學習資料的特徵，並依此進行預測或分類"], ["主要應用", "內容創作（文本生成、圖像生成、語音合成等）", "分類問題（圖像分類、語音辨識、疾病預測等）"], ["模型例子", "GPT、VAE、GAN、Diffusion Models", "SVM、決策樹、隨機森林、Logistic 迴歸等"], ["訓練方式", "學習資料分佈的結構並生成新資料樣本", "基於已有資料進行辨識與分類"], ["結果", "生成新的數據或創造性內容", "辨識資料的類別或預測目標變數"], ["輸出", "新的資料點或內容，如圖像、文字等", "類別標籤或數值預測"], ["實例", "ChatGPT（文本生成）、DALL·E（圖像生成）", "ResNet（圖像分類）、HMM（語音辨識）"]]}, {"title": "生成式 AI 技術演進五階段", "headers": ["階段", "時期", "核心技術", "代表模型"], "rows": [["初期階段", "2013–2015", "變分推斷、機率建模", "VAE、RNN"], ["GAN 時代", "2014–2020", "對抗訓練", "DCGAN、StyleGAN、CycleGAN"], ["Transformer 崛起", "2017 年起", "自注意力機制", "BERT、GPT、T5"], ["擴散與多模態", "2020 年起", "擴散模型（逐步去噪）、多模態對齊", "Stable Diffusion、DALL·E、Flamingo、Gemini"], ["巨型模型與 Agent 化", "2023 年起", "巨型參數、指令微調、工具鏈整合", "GPT-4、Claude、Gemini"]]}, {"title": "文本生成評估指標比較", "headers": ["指標", "衡量重點", "優點", "限制", "適用情境"], "rows": [["BLEU", "詞彙相似度（n-gram 重疊）", "自動化、計算快速", "忽略語意與流暢性", "機器翻譯、文本生成"], ["ROUGE", "摘要資訊召回率", "關注關鍵內容覆蓋", "無法衡量創新性", "自動摘要、問答"], ["人工評估", "流暢性與準確性", "捕捉語意與語用", "主觀性強、成本高", "對話、創意寫作"]]}], "terms": [{"term": "生成式 AI", "en": "Generative AI", "def": "能根據輸入產生全新內容（文本、圖像、音訊、影片、程式碼）的 AI 技術，核心為學習資料分佈並生成新樣本。"}, {"term": "鑑別式 AI", "en": "Discriminative AI", "def": "著重分類、辨識或預測，學習資料特徵以歸類或分配標籤的 AI，如圖像分類與語音辨識。"}, {"term": "對抗生成網路", "en": "GAN", "def": "由生成器與判別器對抗訓練的生成模型，可從噪聲生成高寫實資料，但訓練不穩定易模式崩潰。"}, {"term": "變分自編碼器", "en": "VAE", "def": "利用變分推斷學習資料潛在分佈、從噪聲重建內容的生成模型，是早期生成式 AI 的代表。"}, {"term": "擴散模型", "en": "Diffusion Models", "def": "透過逐步去噪過程從隨機噪聲生成高品質、細節豐富圖像的生成模型，如 Stable Diffusion。"}, {"term": "大型語言模型", "en": "LLM", "def": "基於 Transformer、以大規模語料訓練的龐大參數語言模型，具強大語言理解與生成能力。"}, {"term": "提示工程", "en": "Prompt Engineering", "def": "設計與優化輸入提示以引導生成模型在語氣、風格、格式等層面產出理想結果的技能。"}, {"term": "深偽", "en": "Deepfake", "def": "結合圖像生成與語音合成製作的偽造影音，常被濫用於詐騙與假訊息散播，需技術偵測與法律規範。"}, {"term": "文字轉語音", "en": "TTS", "def": "將文字輸入轉換為自然語音輸出的生成技術，應用於虛擬助理、有聲書與配音等。"}, {"term": "人類回饋強化學習", "en": "RLHF", "def": "結合人類回饋的強化學習，用於模型對齊與防濫用，強化生成內容的安全性與合規性。"}]}, {"id": "3.4", "title": "多模態人工智慧應用", "summary": "多模態 AI（Multimodal AI）能同時處理並整合文字、影像、語音、感測訊號等兩種以上資料模態，相較單模態模型更貼近人類多感官感知。其核心技術為跨模態表示學習（如 CLIP 以對比學習將圖文映射至同一語意空間）與融合學習，技術演進歷經特徵拼接、模態專屬網路＋融合層、到 Transformer 與自注意力驅動的統一架構（如 Flamingo、BLIP-2、M3AE）。應用涵蓋智慧醫療、零售顧客分析、虛實整合互動等，但面臨資料對齊與標註、運算與部署、隱私與法規等挑戰，未來朝統一架構、低資源部署、自我監督學習與代理式 AI 整合發展。", "keypoints": [{"heading": "多模態 AI 定義", "detail": "能同時處理兩種以上不同資料模態（Modality）的 AI 系統，強調跨模態訊息的理解、融合與應用，擴展 AI 的感知能力與智慧水平。"}, {"heading": "常見資料模態", "detail": "文字（離散、語意性強）、影像（空間與顏色紋理）、語音／音訊（時間序列與情緒線索）、感測器資料（反映實體環境的連續變化）。"}, {"heading": "跨模態表示學習", "detail": "Cross-modal Embeddings 將不同模態資料映射至相同語意空間，使模型能比較、關聯或互相翻譯不同模態輸入，是多模態的核心技術。"}, {"heading": "技術三階段演進", "detail": "早期特徵拼接（Feature Concatenation）＋傳統 ML →深度學習模態專屬網路（CNN 處理影像、RNN 處理文字語音）＋融合層→ Transformer 與自注意力驅動的統一架構。"}, {"heading": "CLIP 圖文對齊", "detail": "OpenAI 於 2021 年提出，以對比學習用約 4 億對圖文資料將圖片與文字映射至同一向量空間，語意相符者距離接近，具強零樣本學習能力，為 DALL·E 等生成模型的基礎。"}, {"heading": "CLIP 功能與限制", "detail": "支援圖文匹配、圖文檢索與圖片標題生成（Image Captioning），優勢為零樣本能力強；限制為對複雜情境細節理解有限、訓練資料偏見可能影響公平性。"}, {"heading": "語音模態整合流程", "detail": "語音辨識（ASR，如 Whisper）→自然語言理解（NLU，如 BERT/GPT 解析意圖）→任務執行與回應（生成動作或 TTS 語音回饋）。"}, {"heading": "感測資料融合", "detail": "整合雷達、超音波、溫濕度、GPS、加速度計等，依賴感測融合（Sensor Fusion）技術，分為早期融合（Early Fusion，資料層級）與晚期融合（Late Fusion，特徵層級）。"}, {"heading": "代表多模態模型", "detail": "BLIP／BLIP-2（Salesforce，強化視覺問答 VQA 與雙向理解）、Flamingo（DeepMind，少樣本學習快速適應新任務）、M3AE（基於遮罩預訓練的多模態自編碼器）、ImageBind（Meta，多感知模態統一向量空間）。"}, {"heading": "醫療應用", "detail": "整合影像（CT/MRI）、電子病歷（EMR）與生理訊號（ECG、血糖、血壓）提供診斷支援，如辨識肺部 CT 結節並生成診斷摘要，適用慢性病管理與重症監護。"}, {"heading": "零售應用", "detail": "整合攝影機影像、POS 交易、顧客評論與社群回饋進行消費行為洞察，如分析動線停留優化店面配置、結合評論情感與銷售趨勢進行情境式推薦。"}, {"heading": "虛實整合互動", "detail": "在元宇宙與人機互動領域同步處理語音、文字、表情、姿勢與 3D 模型，如虛擬人偶（Avatar）依語音手勢回應、智慧教室與遠距協作的即時手勢辨識。"}, {"heading": "主要風險與挑戰", "detail": "資料對齊與標註（時間／語意同步、標註成本高）、運算與部署（巨大參數、邊緣壓縮）、隱私與法規（敏感個資、Deepfake 偽造、MLOps 審查）。"}, {"heading": "未來趨勢", "detail": "統一架構（共享表示、支援任意模態）、即時與低資源部署（模型壓縮最佳化）、自我監督學習（降低標註成本）、與代理式 AI 整合，以及法規與倫理框架建置。"}], "tables": [{"title": "多模態 AI 技術演進三階段", "headers": ["階段", "技術特點", "代表方法／模型"], "rows": [["早期階段：特徵拼接與簡單融合", "將各模態特徵向量串接後輸入傳統 ML，無法處理語意對齊", "特徵串接（Feature Concatenation）＋ SVM／決策樹"], ["深度學習階段：模態專屬網路與融合層", "為每種模態設計專屬網路，再經融合層整合", "CNN（影像）、RNN（文字／語音）＋ Fusion Layer"], ["當前階段：Transformer 統一架構", "自注意力驅動跨模態理解，多層次對齊與視覺-語言融合", "M3AE、Flamingo、BLIP-2"]]}, {"title": "多模態 AI 領域應用挑戰與評估指標", "headers": ["應用領域", "整合資料來源", "主要挑戰", "相關評估指標"], "rows": [["醫療診斷與決策支持", "影像（CT/MRI）、電子病歷 EMR、生理訊號（ECG/血糖/血壓）", "資料隱私（HIPAA）、異質資料同步、模型解釋性不足", "診斷準確率、假陽性率、報告 ROUGE 分數"], ["零售與顧客行為分析", "攝影機影像、POS 交易、顧客評論、社群回饋", "顧客隱私、多源資料噪聲、即時處理需求", "推薦準確率（Precision）、動線分析 IOU、情感分析 F1"], ["虛實整合互動與沉浸式", "語音、文字、表情、姿勢、3D 模型", "系統延遲、跨模態一致性、運算資源需求", "回應延遲、語音辨識 WER、姿勢辨識準確率"]]}], "terms": [{"term": "多模態 AI", "en": "Multimodal AI", "def": "能同時處理並整合文字、影像、語音、感測訊號等兩種以上資料模態的人工智慧系統。"}, {"term": "模態", "en": "Modality", "def": "資料的型態類別，如文字、影像、語音／音訊、感測器資料，各具獨特結構與特徵表達方式。"}, {"term": "跨模態表示學習", "en": "Cross-modal Embeddings", "def": "將不同模態資料映射至相同語意空間，使模型能比較、關聯或互相翻譯不同模態輸入的技術。"}, {"term": "對比學習", "en": "Contrastive Learning", "def": "透過拉近相符樣本、推遠不符樣本的訓練方式學習表示，CLIP 即以此對齊圖文嵌入向量。"}, {"term": "感測融合", "en": "Sensor Fusion", "def": "整合多種異質感測器資料並進行同步與特徵對齊的技術，分早期融合與晚期融合。"}, {"term": "視覺問答", "en": "VQA", "def": "Visual Question Answering，依據影像內容回答自然語言問題的多模態任務，由 BLIP 等模型強化。"}, {"term": "BLIP", "en": "Bootstrapping Language-Image Pre-training", "def": "Salesforce 發表的多模態模型，強化圖文問答與生成任務，支援圖片與文字雙向理解。"}, {"term": "Flamingo", "en": "Flamingo", "def": "DeepMind 提出、具少樣本學習能力的多模態模型，可快速適應新的圖文任務。"}, {"term": "自我監督學習", "en": "Self-supervised Learning", "def": "利用大規模未標註資料進行預訓練的學習方式，可降低標註成本並強化跨模態對齊與泛化。"}, {"term": "知識蒸餾", "en": "Knowledge Distillation", "def": "將大模型知識遷移至小模型的壓縮技術，與剪枝、量化並用以利於邊緣設備部署。"}]}], "quiz": [{"q": "下列何者為自然語言處理（NLP）中的詞嵌入技術，能將文字轉換為向量以利機器學習處理？", "options": ["TF-IDF", "Word2Vec", "Stop Words", "Bag-of-Words"], "answer": 1, "explain": "Word2Vec 是一種詞嵌入方法，可將文字轉換為連續向量空間中具語意的表示，有利後續模型學習。"}, {"q": "在自然語言處理應用中，哪一項任務主要目的是從文字中識別出人名、地名、組織等資訊？", "options": ["情感分析", "主題建模", "命名實體識別", "語音辨識"], "answer": 2, "explain": "命名實體識別（NER）用於辨識文本中的具名實體，如人名、地點與組織等。"}, {"q": "語言模型 BERT 的主要特性為何？", "options": ["使用遞迴神經網路", "無法處理上下文資訊", "為單向語言模型", "具雙向上下文理解能力"], "answer": 3, "explain": "BERT（Bidirectional Encoder Representations from Transformers）可同時考慮上下文中前後的語意，有利於更精準的語言理解。"}, {"q": "在電腦視覺中，影像分類（Image Classification）的主要任務是？", "options": ["區分影像中不同實體的邊界", "產生新的影像內容", "為整張圖片指定一個標籤", "判斷影像是否含有文字"], "answer": 2, "explain": "影像分類目標是判斷整張影像的主要內容屬於哪一預定義類別（如貓、狗、汽車）。(A)為語義分割、(B)為生成式任務、(D)為目標偵測。"}, {"q": "若需在一張影像中辨識出多個目標並標示其位置，最適合使用何種技術？", "options": ["影像增強", "影像分類", "目標偵測", "圖像生成"], "answer": 2, "explain": "目標偵測（Object Detection）能辨識圖像中多個實體，並給出邊界框位置資訊。"}, {"q": "生成對抗網路（GAN）的訓練包含哪兩個核心組件？", "options": ["分類器與分群器", "產生器與鑑別器", "強化器與回饋器", "解碼器與編碼器"], "answer": 1, "explain": "GAN 由產生器（Generator）負責生成資料，鑑別器（Discriminator）判斷真偽，兩者相互對抗學習。"}, {"q": "在以下哪一個任務中，生成式 AI 技術最常被應用？", "options": ["詐欺偵測", "語音辨識", "圖片風格轉換", "資料壓縮"], "answer": 2, "explain": "圖片風格轉換（如將相片轉為畫風）是生成式 AI 常見應用之一，通常利用 GAN 完成。"}, {"q": "多模態人工智慧的核心目標為何？", "options": ["提升硬體運算效能", "同時處理並整合來自不同感知類型的資料", "專注於純文字輸入的分析", "僅適用於影像分類任務"], "answer": 1, "explain": "多模態 AI 整合文字、影像、聲音等不同資料來源，提升模型理解與生成能力。"}, {"q": "CLIP 模型結合了哪兩種模態進行訓練？", "options": ["聲音與影像", "影像與文字", "文字與數值", "圖形與表格"], "answer": 1, "explain": "CLIP 由 OpenAI 提出，透過大量圖文配對資料進行對比學習，使模型能理解跨模態語意關聯。"}, {"q": "在多模態 AI 應用中，以下哪一情境最能展現其優勢？", "options": ["SQL 資料查詢", "純圖片壓縮", "影片自動生成字幕", "單一感測器故障排除"], "answer": 2, "explain": "影片字幕生成涉及聲音（語音辨識）、文字（轉錄）、影像（上下文輔助）等多模態資料處理。"}]}, {"chapter": "4", "title": "AI 導入評估規劃", "sections": [{"id": "4.1", "title": "AI 導入評估", "summary": "AI 導入並非單純的技術上線，而是橫跨業務策略、組織文化、資料體系與法規遵循的系統性工程，因此導入前的全面評估是決定成敗的關鍵。本節從業務需求與痛點、技術可行性、成本效益三大面向判斷專案的「必要性」與「可能性」，並進一步盤點組織數位與資料成熟度、跨部門協作能力與資源預算。最後透過初步風險辨識（法規、技術、組織文化）與概念驗證（POC），在最小風險下驗證導入假設，為後續規劃與部署奠定實證基礎。", "keypoints": [{"heading": "評估核心目的", "detail": "判斷 AI 導入是否具有實質價值與可行性，確認其能解決企業痛點、契合業務目標並具備合理成本效益，避免盲目跟風造成資源浪費與決策失誤。"}, {"heading": "業務需求與痛點分析", "detail": "透過利益關係人（Stakeholders）訪談、流程觀察與資料分析，勾勒出「現況流程（As-Is）」與「理想流程（To-Be）」之間的差距，鎖定重複性高、規則清晰或數據驅動的流程作為導入標的。"}, {"heading": "技術可行性三面向", "detail": "評估資料品質（完整性、一致性、代表性與標註狀態）、IT 能力與系統整合性（伺服器、頻寬、雲端、資料倉儲），以及 AI 適配性（監督式/非監督式/強化式/生成式模型的適用性）。"}, {"heading": "成本組成", "detail": "初期成本涵蓋內部人力、技術訓練、資料清洗、模型開發、系統整合、第三方顧問或平台授權等必要開支。"}, {"heading": "效益量化財務指標", "detail": "建立 KPI 並運用 ROI（投資報酬率）、NPV（淨現值）、Payback Period（回收期）等財務模型，量化預測 AI 導入後的預期收益。"}, {"heading": "ROI 計算公式", "detail": "ROI =（投資回報 - 投資成本）/ 投資成本 × 100%；數值越高代表每單位資金帶來的回報越多，是評估專案經濟回報的重要指標。"}, {"heading": "NPV 與回收期", "detail": "NPV = Σ（每期現金流 /（1+折現率）^期數）- 初期投資，為正代表專案有價值；回收期 = 初期投資 / 每年淨現金流，但未考慮時間價值，須與 NPV 搭配使用。"}, {"heading": "組織數位與資料成熟度", "detail": "評估數位成熟度（ERP、CRM、資料倉儲建置）、資料治理（正確性、可追溯性、權限控管、標準與制度）與資料取得流程（API、ETL、自動化資料流整合）。"}, {"heading": "團隊能力與跨部門協作", "detail": "盤點組織能力（AI、資料分析、系統整合人才）、跨部門協作經驗與統一窗口，以及是否設有 AI 專案辦公室或數位轉型小組等推動責任單位。"}, {"heading": "資源與預算支持", "detail": "盤點可調度的資金、人力與時間（Resource Inventory），確認預算來源與編列方式，並評估能否提供試辦環境、測試資料與專責團隊等導入條件。"}, {"heading": "初步風險辨識三類", "detail": "同步辨識法規遵循與資料隱私風險（個資法、GDPR、跨境傳輸、侵權版權）、技術風險與模型穩定性（資料缺口、黑箱、產出不確定性）、以及組織文化與變革阻力。"}, {"heading": "可解釋 AI（XAI）", "detail": "讓使用者理解模型如何做出預測或決策的技術方法，可增強信任、協助偵測偏誤並支援合規審核，廣泛應用於醫療診斷、金融風控、招聘與公部門/法務等高風險領域。"}, {"heading": "風險矩陣與風險等級", "detail": "風險矩陣將「發生可能性（Likelihood）」與「影響程度（Impact）」交叉評估（常見 3x3 或 5x5），風險等級 = 發生機率 × 影響程度，分為低、中、高三級以決定處理優先順序。"}, {"heading": "POC 概念驗證", "detail": "在實際導入前進行小範圍、可控且具代表性的概念驗證（Proof of Concept），透過量化效能指標與質性使用者回饋，驗證技術適配性、效益、組織接受度並辨識瓶頸。"}], "tables": [{"title": "AI 導入可行性評估三大面向", "headers": ["評估面向", "評估重點", "關鍵問題"], "rows": [["業務需求與痛點", "辨識可由 AI 解決的具體問題，分析 As-Is 與 To-Be 差距", "哪些流程可導入？是否有瓶頸/服務缺口？欲提升哪些 KPI？"], ["技術可行性", "資料品質、IT 能力與系統整合、AI 技術路線適配性", "是否具備高品質標註資料？基礎設施是否足夠？適合何種模型？"], ["成本與效益", "成本組成盤點與效益量化（ROI/NPV/Payback）", "初期投入多少？回報是否合理？資源有限時的優先順序？"]]}, {"title": "效益量化財務模型比較", "headers": ["指標", "英文/縮寫", "計算方式", "說明"], "rows": [["投資報酬率", "ROI", "（投資回報 - 投資成本）/ 投資成本 × 100%", "衡量投資效益，數值越高回報越多"], ["淨現值", "NPV", "Σ（每期現金流 /（1+折現率）^期數）- 初期投資", "為正代表專案可帶來超過投入的價值"], ["回收期", "Payback Period", "初期投資成本 / 每年淨現金流", "越短風險越低，但未考慮時間價值"]]}, {"title": "風險等級分類與應對", "headers": ["風險等級", "英文", "處理原則"], "rows": [["低風險", "Low Risk", "可接受，持續監控"], ["中風險", "Medium Risk", "需規劃因應對策"], ["高風險", "High Risk", "應優先處理，必要時迴避或延後導入"]]}], "terms": [{"term": "現況流程／理想流程", "en": "As-Is / To-Be", "def": "現況流程是組織目前實際的作業方式，理想流程是導入 AI 後期望達到的最佳狀態，兩者差距即為導入價值所在。"}, {"term": "投資報酬率", "en": "ROI", "def": "衡量投資回報是否值得的指標，公式為（投資回報-投資成本）/投資成本×100%。"}, {"term": "淨現值", "en": "NPV", "def": "將未來現金流折現後總和減去初期投資的財務模型，為正值代表專案具投資價值。"}, {"term": "回收期", "en": "Payback Period", "def": "投資成本完全回收所需的時間，等於初期投資除以每年淨現金流，越短代表風險越低。"}, {"term": "資料治理", "en": "Data Governance", "def": "確保資料正確性、可追溯性與權限控管，並建立資料標準、管理制度與負責單位的機制，是 AI 成功導入的關鍵前提。"}, {"term": "可解釋 AI", "en": "XAI (Explainable AI)", "def": "能讓使用者理解模型如何做出預測或決策的技術方法與工具，用以增強信任、偵測偏誤並支援合規審核。"}, {"term": "風險矩陣", "en": "Risk Matrix", "def": "將風險發生可能性（Likelihood）與影響程度（Impact）交叉評估的二維視覺化工具，常見 3x3 或 5x5 格式。"}, {"term": "概念驗證", "en": "POC (Proof of Concept)", "def": "在正式導入前以小範圍、可控且具代表性的情境進行測試，驗證 AI 應用的技術可行性與商業價值。"}, {"term": "數位成熟度", "en": "Digital Maturity", "def": "評估組織現行作業流程是否已具備數位化基礎（如 ERP、CRM、資料倉儲），以支撐 AI 模型所需的可靠數據。"}]}, {"id": "4.2", "title": "AI 導入規劃", "summary": "導入規劃扮演承上啟下的核心角色，將初步評估得出的「可行性與價值潛力」轉化為「具體可執行的行動藍圖」。由於不同產業與規模的企業在資料、技術、治理與預算上差異顯著，規劃須以情境/目的導向、資源盤點與彈性調整為核心原則，並透過人力、硬體與工具資源的妥善配置加以落實。本節介紹甘特圖、WBS、Sprint 等任務分解與時程方法、跨部門協作與任務追蹤工具，並比較選用現有商業服務、內部開發與委外開發三種導入模式，最後以 POC 驗證與規劃成果整合作結。", "keypoints": [{"heading": "導入規劃核心原則", "detail": "情境/目的導向（依產業特性定義目標範疇）、資源盤點（評估資料、人力、預算使規模匹配）、彈性調整（因應需求變動或技術瓶頸動態調整），重點在靈活應對而非照表操課。"}, {"heading": "人力資源角色配置", "detail": "AI 專案涵蓋專案負責人（PM）、資料工程師、AI 模型開發者、UI/UX 設計師、業務顧問、系統架構師與測試工程師等多種專業角色，須提前招聘或內部培訓使技能與任務匹配。"}, {"heading": "專案負責人職責", "detail": "Project Manager 負責整體協調與進度管理，制定時程、追蹤里程碑、解決跨部門衝突並與利害關係人溝通，宜具備專案管理知識（如 PMP 認證）。"}, {"heading": "硬體資源需求", "detail": "包括 GPU 伺服器（如 NVIDIA A100 加速訓練）、雲端平台儲存與運算（AWS、Google Cloud、Azure）以及本地運算設備（高效能工作站，適用敏感資料場景）。"}, {"heading": "開發工具與框架", "detail": "常見 Python、TensorFlow、PyTorch 等深度學習框架，大數據處理用 Spark 或 Hadoop，並須設立 Git 等源碼管理與版本控制機制。"}, {"heading": "甘特圖（Gantt Chart）", "detail": "以時間為橫軸、任務為縱軸的視覺化工具，呈現各工作時間安排、重疊區段與關鍵路徑（Critical Path），常標示問題定義、資料準備、模型訓練、驗證測試與部署等階段。"}, {"heading": "工作分解結構（WBS）", "detail": "採由上而下的拆解方式，將複雜任務分割為可控子任務，每一子任務需定義責任角色、預期成果、所需資源與預估時長，以提高透明度並降低執行風險。"}, {"heading": "敏捷開發與 Scrum", "detail": "面對需求快速變動與技術高度不確定的 AI 專案，採用敏捷開發（Agile）取代瀑布式流程，Scrum 框架包含三個角色、五個活動與三個產出（Artifacts）。"}, {"heading": "Scrum 三角色", "detail": "Product Owner（產品負責人，定義需求與優先順序、維護 Product Backlog）、Scrum Master（敏捷教練，協助遵守流程並移除障礙）、Development Team（跨職能開發團隊）。"}, {"heading": "Sprint 短衝節奏", "detail": "Sprint 是 Scrum 的節奏核心，為固定週期（通常 1-4 週、常見 2 週），結束後依序進行 Sprint Review（展示成果）、Sprint Retrospective（回顧檢討）與 Sprint Planning（下一輪規劃）。"}, {"heading": "跨部門協作機制", "detail": "明確各部門責任範圍（協作流程設計）、設立每週例會等例行同步節奏，並採用共用工具平台（任務看板 Jira/Trello、文件平台 Notion/Confluence、即時通訊 Slack/Teams）。"}, {"heading": "任務追蹤工具", "detail": "Trello（輕量看板，適小型/原型）、Asana（任務分層與時間軸，適跨部門）、JIRA（技術團隊導向，支援敏捷與問題追蹤）、ClickUp（結合看板與結構化，適中型專案）。"}, {"heading": "導入模式三選一", "detail": "選用現有商業服務（Low-code/No-code，快速但彈性有限）、內部技術團隊開發（高客製化但成本高、需技術基礎）、委外開發（借助外部專業加速但需管理合約與資料安全）。"}, {"heading": "POC 與快速迭代", "detail": "POC 聚焦單一功能或情境，採小範圍測試與快速迭代（Rapid Iteration，每輪 1-2 週），以技術效能、商業價值與使用者回饋三類指標驗證可行性。"}, {"heading": "規劃成果整合輸出", "detail": "包含導入規劃文件、專案成果彙整報告（Planning Summary）、甘特圖與時程、資源估算與成本預算表、以及利害關係人審查紀錄（Stakeholder Review），作為進入實作階段的依據。"}], "tables": [{"title": "AI 導入模式比較（自建 vs 採購 vs 委外）", "headers": ["模式", "適用情境", "優勢", "挑戰/考量"], "rows": [["選用現有商業服務（Low-code/No-code）", "技術能力有限或時間緊迫的企業", "快速部署、技術門檻低、彈性運用", "自定義彈性有限、長期訂閱成本高、資料隱私風險"], ["內部技術團隊開發", "具技術人力與硬體、有長期 AI 計畫的企業", "掌控力強、高度客製化、保留技術自主", "需投入大量時間與資源、初期成本高、依賴技術基礎"], ["委外開發", "缺乏內部技術但有預算支持的企業", "專業性高、執行效率佳、縮短時程", "需管理合約（交付範圍/時程）與資料安全風險"]]}, {"title": "Scrum 框架組成", "headers": ["類別", "組成項目", "說明"], "rows": [["角色", "Product Owner", "定義產品需求與優先順序，維護 Product Backlog"], ["角色", "Scrum Master", "協助遵守 Scrum 流程、移除障礙、促進持續改善"], ["角色", "Development Team", "跨職能成員，負責完成 Sprint 內開發任務"], ["活動", "Sprint Planning / Daily Scrum / Sprint / Sprint Review / Sprint Retrospective", "規劃會議、每日站會、短衝開發、成果展示、回顧檢討"], ["產出", "Product Backlog / Sprint Backlog / Increment", "產品待辦清單、本次短衝任務清單、可交付的完整產品版本"]]}, {"title": "任務追蹤工具比較", "headers": ["工具", "特性", "適用情境"], "rows": [["Trello", "輕量級看板（Kanban），卡片標註狀態/負責人/期限", "小型團隊或初期原型階段"], ["Asana", "任務分層、時間軸檢視、跨專案整合", "需跨部門協作的專案"], ["JIRA", "問題追蹤、工作流自訂、支援 Scrum/Kanban", "資料科學家與工程師主導的技術專案"], ["ClickUp", "結合看板與結構化、檢查清單、里程碑、外部整合", "中型 AI 專案"]]}], "terms": [{"term": "甘特圖", "en": "Gantt Chart", "def": "以時間為橫軸、任務為縱軸的視覺化排程工具，能呈現各工作時間安排、重疊區段與關鍵路徑。"}, {"term": "工作分解結構", "en": "WBS (Work Breakdown Structure)", "def": "由上而下將複雜任務分割為可控子任務的方法，每一子任務定義責任、成果、資源與時長。"}, {"term": "短衝", "en": "Sprint", "def": "Scrum 中固定週期（通常 1-4 週）的開發節奏，團隊針對特定目標進行開發、測試與整合。"}, {"term": "敏捷開發", "en": "Agile Development", "def": "強調迭代、快速回應變化的開發方法論，Scrum 為其最常見的框架，適合需求多變的 AI 專案。"}, {"term": "產品待辦清單", "en": "Product Backlog", "def": "由 Product Owner 維護的產品開發待辦事項清單，依業務價值排定優先順序。"}, {"term": "關鍵路徑", "en": "Critical Path", "def": "專案中決定整體最短完成時間的任務序列，任一環節延遲都會影響整個專案時程。"}, {"term": "服務水準協議", "en": "SLA (Service Level Agreement)", "def": "與第三方供應商約定服務品質標準的合約，例如系統延遲超標由供應商賠償。"}, {"term": "可交付成果", "en": "Increment", "def": "每次 Sprint 結束時產出的完整、可運作的產品版本。"}]}, {"id": "4.3", "title": "AI 風險管理", "summary": "AI 的風險不同於傳統 IT 專案，除技術落差與部署複雜性外，更牽涉資料偏誤、模型不穩定、演算法不透明、個資濫用、法規責任與社會倫理爭議等多重層面。風險管理不應只是部署後的輔助工作，而應作為前瞻性、持續性機制，自規劃階段即納入並貫穿開發、測試、部署與運維的全生命週期，形成制度化的 AI 治理（AI Governance）。本節涵蓋技術/組織/法規三層風險識別、GDPR 與個資法等合規評估、模型偏見與公平性、國際 AI 倫理原則與內部治理框架，以及迴避/轉移/緩解/接受四種風險控管策略與 MLOps 監控工具。", "keypoints": [{"heading": "AI 治理全生命週期", "detail": "AI 風險管理應為前瞻性與持續性機制，自規劃階段納入並貫穿模型開發、測試、部署及運維各階段，形成完整的全生命週期治理體系（AI Governance）。"}, {"heading": "技術層風險", "detail": "包含資料品質風險（資料遺漏 Missing Data、資料偏頗 Data Bias、不正確標註、資料漂移 Data Drift）與模型穩定性風險（模型漂移 Model Drift、過擬合 Overfitting、概念漂移 Concept Drift）。"}, {"heading": "過擬合（Overfitting）", "detail": "模型在訓練資料上表現很好，但對未見過的測試資料無法正確預測，因過度學習了訓練資料中的噪聲與細節而缺乏泛化能力。"}, {"heading": "漂移三類辨析", "detail": "資料漂移（Data Drift）是輸入資料分佈改變；模型漂移（Model Drift）是模型預測準確度隨時間變差；概念漂移（Concept Drift）是資料背後的潛在關係或模式隨時間改變。"}, {"heading": "組織人力層風險", "detail": "包含跨部門溝通風險（資訊不透明、角色責任不清）、技能短缺風險（Skill Gap，技能落差與人才流動）與變革抵制風險（員工視 AI 為職位威脅而抗拒採用）。"}, {"heading": "法規層風險", "detail": "包含個資與隱私保護風險（GDPR、台灣個資法）、產業特定監管風險（如醫療 HIPAA、金融 PCI-DSS）與侵權風險（未授權使用第三方資料、演算法或開源軟體）。"}, {"heading": "GDPR 資料主體權利", "detail": "歐盟通用資料保護規則賦予資料主體刪除權/遺忘權（第17條）、修正權、資料可攜權（第20條）、反對自動化決策權（第22條）、查閱權（第15條，須30日內回覆）等多項權利。"}, {"heading": "GDPR 核心原則", "detail": "包含同意原則（明確、自由給予且可隨時撤回）、資料最小化原則（只收集必要資料）、問責制（Accountability，須證明落實合規措施），高風險處理須進行資料保護影響評估（DPIA）。"}, {"heading": "台灣個資法（PDPA）", "detail": "規範個資收集、處理及使用須具特定目的並取得明確同意、履行通知義務；資料主體可查閱、複製、更正、刪除並隨時要求停止處理，企業須實施適當安全維護措施。"}, {"heading": "產業專用合規規範", "detail": "HIPAA（美國健康資訊，含技術/實體/行政三類保護措施）、PCI-DSS（支付卡資料安全，含加密與滲透測試）、台灣金融科技創新實驗條例、醫療器材管理法、電信管理法、智慧財產權法。"}, {"heading": "模型偏見四大來源", "detail": "資料分布不均（Imbalanced Data）、歷史偏見（Historical Bias，數據反映既有社會偏見）、標註偏見（Labeling Bias，標註者觀點影響）、演算法偏見（Algorithmic Bias，優化整體效能卻犧牲特定群體公平）。"}, {"heading": "歧視性結果影響", "detail": "未妥善處理偏見可能對弱勢群體（性別、種族、年齡、身障）產生不公平待遇（如貸款、招聘歧視），並引發輿論反彈、消費者抵制、法律訴訟與監管處罰，損害企業品牌與信譽。"}, {"heading": "國際 AI 倫理四原則", "detail": "透明度（Transparency，揭露運作邏輯）、可解釋性（Explainability，提供決策解釋）、公平性（Fairness，避免偏見）、問責性（Accountability，建立明確責任體系），參考歐盟、OECD、UN、GPAI、ISO/IEC 等。"}, {"heading": "企業內部倫理治理框架", "detail": "設立跨領域倫理委員會（Ethics Committee）、建立 AI 審查流程（Ethical Review Process，部署前評估倫理影響）、推動內部教育訓練，以及透明度與對外溝通（Public Communication）。"}, {"heading": "四種風險控管策略", "detail": "迴避（Avoidance，不執行高風險活動）、轉移（Transfer，透過保險或委外合約由第三方承擔）、緩解（Mitigation，主動降低發生機率或影響，最常見）、接受（Acceptance，低衝擊風險接受並監控）。"}, {"heading": "MLOps 風險監控", "detail": "MLOps（機器學習運維）將模型建置、部署、監控與修正自動化，支援模型漂移監控、資料漂移監控、效能異常警示（如錯誤率超5%）與自動重新訓練（Auto-retraining）。"}], "tables": [{"title": "AI 風險類型總覽", "headers": ["風險層級", "風險類型", "常見問題/說明", "影響案例"], "rows": [["技術層", "資料品質風險", "資料遺漏、資料偏頗、不正確標註、資料漂移", "信用評分系統因歷史資料偏差導致特定族群被歧視"], ["技術層", "模型穩定性風險", "模型漂移、過擬合、概念漂移", "製造業瑕疵辨識系統在產線微調後精準度下降，成本上升"], ["組織人力層", "跨部門溝通風險", "資訊不透明、溝通管道不足、角色責任不清", "金融機構風控與 IT 部門溝通不足，模型與業務需求脫節"], ["組織人力層", "技能短缺風險", "技能落差、人才流動過快", "公共服務機構缺乏資料分析與模型維護人員，系統無法運作"], ["組織人力層", "變革抵制風險", "內部文化抗拒、員工配合度低", "醫療院所人員擔憂被取代，AI 輔助診斷系統使用率低落"], ["法規層", "個資與隱私保護風險", "資料收集使用未符法規、未取得充分同意", "科技公司未充分揭露資料用途，遭 GDPR 高額罰款"], ["法規層", "產業特定監管風險", "監管遵循不足、未即時更新合規標準", "銀行 AI 客戶辨識系統未完整合規，導致營運暫停與罰款"], ["法規層", "侵權風險", "未授權使用第三方資料/演算法、未遵守開源授權", "科技公司未授權使用第三方訓練資料，被判侵權面臨巨額賠償"]]}, {"title": "四種風險應對策略", "headers": ["策略", "英文", "做法", "適用情境/範例"], "rows": [["迴避", "Avoidance", "不執行相關活動，從根本避免風險", "技術風險高或法規限制嚴格時，如暫緩誤診風險過高的 AI 診斷專案"], ["轉移", "Transfer", "透過保險、委外合約、SLA 由第三方承擔損失", "購買 AI 系統故障保險、簽訂供應商賠償條款"], ["緩解", "Mitigation", "主動措施降低發生機率或影響（最常見）", "資料清洗、交叉驗證、持續監控、資料加密與合規培訓"], ["接受", "Acceptance", "接受低衝擊風險並設定監控指標", "小規模資料漂移僅影響 1% 準確率、修復成本高於收益時"]]}, {"title": "國際 AI 倫理四原則", "headers": ["原則", "英文", "核心要求"], "rows": [["透明度", "Transparency", "向使用者與公眾說明模型運作邏輯、決策依據與可能結果，高風險領域要求更嚴"], ["可解釋性", "Explainability", "提供足夠資訊讓使用者理解 AI 決策過程，並能在出問題時提出合理挑戰"], ["公平性", "Fairness", "積極避免偏見，確保模型在不同群體間不產生歧視，最小化偏差"], ["問責性", "Accountability", "建立明確責任體系，為設計、開發、部署、運營確立責任人並能即時修正"]]}, {"title": "主要資料保護與產業合規法規", "headers": ["法規/標準", "適用範圍", "重點"], "rows": [["GDPR", "處理歐盟居民個資的所有企業（不論是否位於歐盟）", "資料主體權利（刪除/修正/可攜/反對自動化決策）、同意、資料最小化、問責、DPIA"], ["台灣個資法 PDPA", "台灣境內或涉及台灣居民個資的組織", "特定目的、明確同意、通知義務、查閱更正刪除權、安全維護措施"], ["美國 CDPA", "美國特定州（如維吉尼亞州）", "查閱、修正、刪除、可攜權，透明隱私政策，敏感資料加強保護"], ["HIPAA", "美國涉及健康資訊的機構", "技術性、實體性、行政性三類保護措施（加密、存取控制、災難復原、教育訓練）"], ["PCI-DSS", "處理支付卡資訊的機構", "防火牆、傳輸與儲存加密（TLS/AES）、多因素認證、弱點掃描與滲透測試"]]}], "terms": [{"term": "資料漂移", "en": "Data Drift", "def": "模型運行過程中輸入資料的分佈發生變化，使預測結果逐漸偏離原有準確度。"}, {"term": "概念漂移", "en": "Concept Drift", "def": "資料背後的潛在關係或模式隨時間改變，導致模型預測不再準確，常見於長期運行的模型。"}, {"term": "過擬合", "en": "Overfitting", "def": "模型過度學習訓練資料中的噪聲與細節，在訓練資料表現好但對未見資料缺乏泛化能力。"}, {"term": "歐盟通用資料保護規則", "en": "GDPR", "def": "全球資料隱私保護的指標性法規，適用於處理歐盟居民個資的所有企業，賦予資料主體刪除權、可攜權等多項權利。"}, {"term": "台灣個人資料保護法", "en": "PDPA", "def": "規範在台灣境內或涉及台灣居民個資的處理，要求收集使用須具特定目的、取得明確同意並履行通知與保護義務。"}, {"term": "資料保護影響評估", "en": "DPIA", "def": "當資料處理可能對資料主體權利與自由造成高風險時，依 GDPR 必須進行的風險評估程序。"}, {"term": "公平性", "en": "Fairness", "def": "AI 應用須積極避免偏見、確保模型在不同群體間不產生歧視的倫理原則。"}, {"term": "問責性", "en": "Accountability", "def": "企業須建立清晰的 AI 治理責任體系，為模型設計、部署與運營確立明確責任人並能即時修正錯誤。"}, {"term": "機器學習運維", "en": "MLOps", "def": "將機器學習開發與營運整合的最佳實踐，自動化模型建置、部署、監控與修正，支援漂移監控與自動重新訓練。"}, {"term": "AI 治理", "en": "AI Governance", "def": "貫穿規劃、開發、測試、部署到運維全生命週期的制度化風險治理架構，維持 AI 系統長期的合規性與穩定性。"}]}], "quiz": [{"q": "在評估企業 AI 導入可行性時，下列哪一項屬於「商業價值評估」的考量？", "options": ["模型參數量大小", "開發人員數量", "預期效益與回報", "演算法選擇難度"], "answer": 2, "explain": "商業價值評估主要衡量 AI 專案在解決問題或創造價值上的潛力，例如降低成本、增加收入或提升效率。"}, {"q": "在進行 AI 導入評估時，為確保企業體系具備執行能力，應考量下列哪一項？", "options": ["使用者介面風格", "技術成熟度與部署資源", "品牌識別度", "客服滿意度"], "answer": 1, "explain": "技術評估是導入前的重要環節，需確認所選技術是否穩定且能在現有架構下順利實作。"}, {"q": "企業進行 AI 導入前的評估分析，通常第一步應聚焦於？", "options": ["演算法選擇", "資料標註工具", "業務痛點與需求辨識", "建立測試模型"], "answer": 2, "explain": "AI 導入需以業務需求為出發點，若無明確問題定義，後續模型開發將失焦或無法產生實際效益。"}, {"q": "在 AI 導入專案的初期規劃階段，下列哪一項屬於「人員規劃」的重點內容？", "options": ["API 規格設計", "模型優化參數", "AI 專案所需的跨部門協作角色", "作業系統版本"], "answer": 2, "explain": "AI 專案導入涉及資料、業務、IT 等部門合作，需在規劃階段即明確分工與責任分配。"}, {"q": "在 AI 導入規劃過程中，下列哪一項規劃內容最能避免部門間溝通斷裂與責任不清的風險？", "options": ["確認所採用演算法的最新研究成果", "由高階主管全權拍板模型選擇與部署方式", "建立跨部門協作機制與角色分工", "優先採購效能最佳的 GPU 運算資源"], "answer": 2, "explain": "AI 導入需橫跨業務、資料、IT 等多部門，建立協作機制可確保需求對齊、資料準備、模型開發與部署流程協同一致。"}, {"q": "當 AI 導入規劃需評估系統部署模式時，若考量資料隱私與本地控制需求，應優先考慮？", "options": ["第三方雲端部署", "地端私有部署", "區塊鏈儲存方式", "外包給 AI 公司"], "answer": 1, "explain": "地端部署可提供更強的資料控制與隱私保障，常見於金融、政府、醫療等敏感領域。"}, {"q": "在 AI 風險評估中，若模型輸出不穩定且缺乏邏輯可解釋性，可能帶來哪一風險？", "options": ["模型效率過高", "公平性過度提升", "決策透明性不足", "資料使用效率太高"], "answer": 2, "explain": "模型無法解釋其輸出會降低使用者與監管單位的信任，是常見的 AI 風險來源之一。"}, {"q": "以下何者屬於 AI 模型偏誤造成的風險？", "options": ["語法錯誤", "輸入資料格式錯誤", "特定族群預測結果不公平", "模型壓縮後效能下降"], "answer": 2, "explain": "資料或模型偏誤常導致對少數族群、女性或弱勢族群的不公平結果，是需積極管理的 AI 倫理風險。"}, {"q": "為管理 AI 導入過程中的「法律與合規風險」，企業應採取何種措施？", "options": ["強化演算法複雜度", "減少模型訓練次數", "檢視個資使用的合法性", "加速模型部署速度"], "answer": 2, "explain": "若使用涉及個人資料，須確認是否符合資料保護法（如 GDPR 或個資法）規範。"}, {"q": "AI 模型部署後，若長期輸入資料分佈逐漸改變導致效能下降，最適合採取下列哪一項作法進行風險管理？", "options": ["定期重啟伺服器以排除效能問題", "加入多個冗餘模型以進行同時預測", "建置概念漂移監控與觸發模型再訓練流程", "縮減模型層數以降低計算成本"], "answer": 2, "explain": "概念漂移（Concept Drift）指資料分佈隨時間改變，須建置監控機制偵測異常並結合模型再訓練策略進行調整。"}]}, {"chapter": "5", "title": "AI 技術應用與系統部署", "sections": [{"id": "5.1", "title": "數據準備與模型選擇", "summary": "本節說明如何將 AI 從概念轉為可用系統的前期關鍵：資料準備與模型選擇。業界常言「垃圾進，垃圾出（GIGO）」，資料品質直接決定模型可靠度與準確度，因此須建立系統化的資料收集、清理、特徵工程流程。完成資料準備後，再依問題類型（迴歸、分類、分群、生成等）與資料特性選擇最適模型架構，涵蓋監督式、非監督式、深度學習、強化式與生成式學習等任務類型與常見演算法。", "keypoints": [{"heading": "GIGO 與資料品質", "detail": "「Garbage In, Garbage Out（GIGO）」指出資料品質直接影響 AI 模型的可靠性與準確度；資料是模型推理與預測的基礎，系統化的資料收集與清理流程攸關專案成敗。"}, {"heading": "資料來源（內部 vs 外部）", "detail": "內部資料含 ERP、CRM、機台資料（Machine Data）、使用者行為資料（POS / Web / App / IoT）與內部報表流程紀錄；外部資料含政府開放資料、Web Scraping（網頁爬蟲）與商業資料庫（如 Refinitiv、Statista、Experian）。"}, {"heading": "缺失值處理", "detail": "常見方法包括平均數/中位數填補（Mean/Median Imputation）、前後值填補（Forward/Backward Fill）與插值法（Interpolation）；若缺失比例過高則應刪除欄位或以模型推估填補。"}, {"heading": "重複值與異常值清理", "detail": "針對主鍵欄位以 .drop_duplicates() 去重；異常值以統計法 Z-score 或 IQR 篩選，亦可用 Isolation Forest、LOF（Local Outlier Factor）等機器學習模型偵測。"}, {"heading": "資料品質評估指標", "detail": "五大指標為完整性（Completeness）、一致性（Consistency）、準確性（Accuracy）、即時性（Timeliness）與唯一性（Uniqueness），用於檢核資料是否可用。"}, {"heading": "數值特徵：正規化 vs 標準化", "detail": "正規化（Normalization）將數值縮放至 0~1 之間，避免單位差異造成偏誤；標準化（Standardization）使數值轉為平均數 0、標準差 1 的分布（常用 Z-score），對需計算梯度的模型（如線性迴歸、SVM）特別有效。"}, {"heading": "類別特徵編碼", "detail": "獨熱編碼（One-hot Encoding）將類別轉為二進位欄位，適用無序分類變數；標籤編碼（Label Encoding）將類別轉為整數，適用有序類別（如高中、學士、碩士）。"}, {"heading": "時間與文字特徵擴增", "detail": "從時間戳擷取週期性特徵（星期幾、上午/下午、工作日/週末）；文字以 TF-IDF 或詞向量（Word Embeddings）轉為數值型資料，方便模型處理。"}, {"heading": "特徵選擇", "detail": "從所有特徵中挑選對預測最有用者，常用方法有資訊增益（Information Gain）、皮爾森相關係數（Pearson Correlation）衡量線性相關，以及 L1 正則化（Lasso）懲罰複雜度以選出最具影響力特徵。"}, {"heading": "降維", "detail": "將高維資料轉為低維並保留資訊；PCA（主成分分析）找方差最大方向以減維、提升效能，t-SNE / UMAP 則常用於視覺化資料分佈以觀察分類趨勢。"}, {"heading": "AutoML 自動特徵工程", "detail": "Google AutoML、H2O.ai、AutoKeras、TPOT 等平台可自動創建、篩選與組合特徵、檢測交互作用（Interaction）並依模型反饋調整，能加速資料科學流程、降低技術門檻並提升模型效能。"}, {"heading": "監督式學習：迴歸任務", "detail": "迴歸（Regression）預測連續數值，輸出為實數；常見演算法有線性迴歸、決策樹迴歸、隨機森林迴歸、梯度提升樹，應用於銷售量預測、房價預測等。"}, {"heading": "監督式學習：分類任務", "detail": "分類（Classification）將資料歸入離散標籤；常見演算法有邏輯迴歸、決策樹、隨機森林、SVM、KNN、梯度提升樹，應用於垃圾郵件識別、疾病診斷、客戶流失預測與金融風險評估。"}, {"heading": "非監督式學習：分群", "detail": "在無標註資料下找出內在結構；K-means（須給定 K 值，對異常值敏感）、DBSCAN（基於密度、可找任意形狀群集並標示雜訊）、階層式分群（建立樹狀層級）與 PCA 降維，應用於顧客分群與異常偵測。"}, {"heading": "深度學習常見架構", "detail": "CNN 處理圖像與空間特徵（人臉辨識、工業檢測）；RNN/LSTM/GRU 處理時間序列並記憶前序資訊；Transformer 以自注意力（Self-Attention）機制建構語意關聯，代表模型 BERT、GPT 在 NLP 成為主流。"}, {"heading": "強化式與生成式學習", "detail": "強化式學習（RL）以試誤學習透過 Agent-Action-State-Reward 學最優策略，演算法如 Q-learning、DQN、Policy Gradient、PPO；生成式模型學習資料機率分佈以「創造」新樣本，包含 GAN、VAE 與擴散模型（Diffusion，如 Stable Diffusion）。"}], "tables": [{"title": "資料品質（Data Quality）評估指標", "headers": ["指標", "英文", "說明"], "rows": [["完整性", "Completeness", "資料是否完整、是否缺少關鍵欄位"], ["一致性", "Consistency", "資料欄位間邏輯是否一致（如年齡不應為負數）"], ["準確性", "Accuracy", "資料值是否準確並反映真實世界狀況"], ["即時性", "Timeliness", "資料是否為最新，尤其是動態變化的數據"], ["唯一性", "Uniqueness", "資料是否有重複或衝突，特別是主鍵欄位"]]}, {"title": "數值與類別特徵處理方法", "headers": ["方法", "英文", "處理對象", "說明"], "rows": [["正規化", "Normalization", "數值特徵", "縮放至 0~1 之間，避免單位差異造成學習偏誤"], ["標準化", "Standardization (Z-score)", "數值特徵", "轉為平均 0、標準差 1 的分布，適合需計算梯度的模型"], ["獨熱編碼", "One-hot Encoding", "類別特徵", "轉為二進位欄位，適用無序分類變數"], ["標籤編碼", "Label Encoding", "類別特徵", "轉為整數，適用有序類別（如學歷高低）"]]}, {"title": "模型任務類型與常見演算法", "headers": ["任務類型", "學習類型", "常見演算法", "應用情境"], "rows": [["迴歸 Regression", "監督式學習", "線性迴歸、決策樹迴歸、隨機森林迴歸、梯度提升樹", "銷售量預測、房價預測"], ["分類 Classification", "監督式學習", "邏輯迴歸、決策樹、隨機森林、SVM、KNN、梯度提升樹", "垃圾郵件識別、疾病診斷、客戶流失、金融風險評估"], ["分群 Clustering / 降維", "非監督式學習", "K-means、DBSCAN、階層式分群、PCA", "顧客分群、異常偵測、資料視覺化"], ["深度學習任務", "深度學習", "CNN、RNN / LSTM / GRU、Transformer", "醫療影像、智慧客服/語音、自動駕駛、金融風險"], ["決策/控制 RL", "強化式學習", "Q-learning、DQN、Policy Gradient、PPO", "自駕車控制、智慧倉儲物流、資源調度、遊戲 AI"], ["生成 Generative", "生成式模型", "GAN、VAE、擴散模型 Diffusion", "影像與藝術生成、語音/文本合成、資料補全與模擬"]]}, {"title": "生成式模型比較", "headers": ["模型", "英文", "特性", "缺點"], "rows": [["生成對抗網路", "GAN", "生成器與判別器對抗訓練，適用圖像生成、人臉合成、風格轉換", "訓練不穩定，可能出現模式崩潰（Mode Collapse）"], ["變分自編碼器", "VAE", "潛在空間結構良好，適用異常偵測、語音重建與隱含變數建模", "生成樣本平滑但有時缺乏銳利細節"], ["擴散模型", "Diffusion", "逐步加入與移除噪聲學習反向過程，圖像品質佳（DALL·E 2、Stable Diffusion）", "生成速度慢、運算成本高"]]}], "terms": [{"term": "垃圾進垃圾出", "en": "GIGO (Garbage In, Garbage Out)", "def": "指輸入資料品質低劣將導致模型輸出不可靠，強調資料品質對 AI 模型的決定性影響。"}, {"term": "插值法", "en": "Interpolation", "def": "一種缺失值填補方法，依據已知資料點推估中間缺失的數值。"}, {"term": "Z-score 標準化", "en": "Z-score / Standardization", "def": "將數值轉換為平均數 0、標準差 1 的分布，適合需計算梯度的模型如線性迴歸與 SVM。"}, {"term": "四分位距", "en": "IQR (Interquartile Range)", "def": "以資料第一與第三四分位數之間距離篩選異常值的統計方法。"}, {"term": "獨熱編碼", "en": "One-hot Encoding", "def": "將類別變數轉換為多個二進位欄位的編碼方式，適用於無序分類變數。"}, {"term": "標籤編碼", "en": "Label Encoding", "def": "將類別轉換為整數編碼的方式，適用於有順序意義的有序類別。"}, {"term": "主成分分析", "en": "PCA (Principal Component Analysis)", "def": "藉由找出資料中方差最大的方向來降維，保留大部分資訊以提升效能與視覺化。"}, {"term": "自動化機器學習", "en": "AutoML", "def": "透過智慧算法自動完成特徵生成、篩選與模型建構，降低技術門檻並加速資料科學流程。"}, {"term": "隨機森林", "en": "Random Forest", "def": "結合多棵決策樹進行平均或投票的集成學習法，可提升準確度並降低過度擬合風險。"}, {"term": "K 最近鄰", "en": "KNN (K-Nearest Neighbors)", "def": "依鄰近資料點的類別進行預測的演算法，簡單直觀但對資料量與維度敏感。"}, {"term": "Transformer 架構", "en": "Transformer", "def": "以自注意力（Self-Attention）機制建構語意關聯的深度學習架構，為 NLP 主流，代表模型如 BERT、GPT。"}, {"term": "擴散模型", "en": "Diffusion Models", "def": "透過逐步加入與移除噪聲學習資料反向轉換過程的生成模型，圖像品質佳但速度慢、成本高。"}]}, {"id": "5.2", "title": "AI 技術系統集成與部署", "summary": "本節聚焦如何將候選模型部署至實際營運環境並持續產生商業價值。相較傳統 IT，AI 系統部署的複雜性來自動態性與資料敏感性，模型效能會隨輸入資料變化而衰退（模型漂移），須具備彈性更新、即時監控與合規能力。內容涵蓋系統集成面向（資料管線、企業系統、API、安全、跨雲整合）、架構設計（微服務、容器化、模型服務化）、四種部署模式（公有雲、私有雲、邊緣、混合），以及 MLOps 流程（CI/CD、版本控管、監控與回訓）、成效指標與跨部門協作治理。", "keypoints": [{"heading": "AI 部署的複雜性", "detail": "AI 系統部署的動態性與資料敏感性高於傳統 IT：模型會隨資料變化失效（模型漂移）、推論服務對延遲與可用性要求高、需自動化重訓與版本控管，並須符合資料使用與透明度的合規要求。"}, {"heading": "資料管線整合", "detail": "現代 AI 系統須從資料倉儲（Data Warehouse）、資料湖（Data Lake）、IoT 即時感測資料與第三方 API 取得資料，並建立完整資料管線（Data Pipeline）涵蓋擷取、格式轉換、清理與入庫。"}, {"heading": "企業內部系統整合", "detail": "須將模型輸出整合回 ERP、CRM、POS、MES 等核心系統，使預測結果導入日常作業流程；例如 CRM 依推薦自動寄送促銷信、ERP 依需求預測動態調整採購。"}, {"heading": "API 與平台接軌", "detail": "為讓前端應用（網站、App、BI 工具）即時取得推論結果，需封裝為服務介面，最常見為 RESTful API，亦可依效能與雙向通訊採 gRPC 或 Webhooks，並納入容錯、快取與負載管理。"}, {"heading": "安全與權限控管", "detail": "使用 OAuth2 或 JWT（JSON Web Token）進行身份驗證與授權、對不同角色設定不同存取權限（如僅部分用戶可重訓/調參），並以 API Gateway 進行存取日誌與流量控管。"}, {"heading": "微服務架構", "detail": "將單一應用拆分為可獨立部署、更新與擴展的小型服務；優點是易於隔離錯誤、適合跨團隊並行開發、可彈性調整資源，挑戰則是介接需標準 API 且分散式管理複雜度高。"}, {"heading": "容器化與編排", "detail": "Docker 將應用與依賴環境封裝以確保跨平台一致性，Kubernetes（K8s）負責容器編排、資源調度與故障恢復；常見原則包含滾動更新（Rolling Update）、自動擴縮（Autoscaling）與負載平衡（Load Balancing）。"}, {"heading": "模型服務化與 API 封裝", "detail": "以 Flask、FastAPI、TensorFlow Serving 等工具將模型封裝為 HTTP/REST 推論服務，並支援多版本管理（Model Versioning）、API 安全機制（驗證、速率限制）與推論結果的記錄與監控（Log & Metrics）。"}, {"heading": "高可用性設計", "detail": "面對高變動流量與嚴格可靠性需求，應採冗餘部署（Redundancy）以多節點避免單點故障，並設計容錯切換（Failover）於節點故障時自動切換至備援節點。"}, {"heading": "四種部署模式", "detail": "公有雲（彈性快速、按量付費，但有合規與供應商鎖定風險）、私有雲（控制性與資安高，但成本高、彈性受限）、邊緣運算（低延遲、保護隱私，但運算資源有限）、混合部署（兼顧能力與保護，但整合難度高）。"}, {"heading": "MLOps 核心理念", "detail": "MLOps（Machine Learning Operations）是 DevOps 在 AI 領域的延伸，強調將模型訓練、測試、部署與監控進行持續整合與自動化，確保模型在全生命週期中的一致性、效率與可追蹤性。"}, {"heading": "CI/CD 持續整合與部署", "detail": "CI 於原始碼或資料變動時觸發模型訓練、測試與效能基準比較；CD 將通過測試門檻的模型自動部署至測試或生產環境，並支援 A/B 測試或藍綠部署（Blue-Green Deployment）以控制風險。"}, {"heading": "模型版本控管", "detail": "透過 MLflow（開源平台，管理實驗記錄、訓練、部署與版本控制）與 DVC（Data Version Control，專為 ML 設計的資料集與模型版本追蹤工具）建立可重現性。"}, {"heading": "模型監控與概念漂移", "detail": "部署後須監控模型漂移（Model Drift，預測分佈與訓練時不同）、資料漂移（Data Drift，輸入統計特徵改變）與錯誤率、延遲、吞吐量等指標；當超過觸發門檻（如準確率下降 5%）即啟動再訓練流程（Retraining Pipeline）或以熱更新（Hot Swap）/滾動更新替換模型。"}, {"heading": "視覺化、預警與成效指標", "detail": "整合 Log 分析與 Dashboard 工具（如 Prometheus + Grafana）並設自動警告；成效指標分系統層級（延遲、吞吐量、Uptime）、應用層級（CTR、Accuracy、F1-Score）與業務層級（轉換率、ROI、客戶留存率），建議採「技術指標＋業務指標」雙軌制。"}, {"heading": "持續優化與再訓練", "detail": "建立回收週期（每日監控、每週收集錯誤樣本、每月評估 retraining 需求）；以金絲雀部署（Canary Deployment）降低風險，並融入使用者與業務回饋（Human-in-the-Loop）與 AutoML / 線上學習（Online Learning）持續微調模型。"}, {"heading": "跨部門協作與 AI 治理", "detail": "AI 落地需業務/行銷、客服/營運、法務/風險與資訊等部門協作；應建立常態溝通與共用 KPI，並將 AI 納入組織治理，設立 AI 治理委員會、內部 AI 產品經理與跨部門培訓機制。"}], "tables": [{"title": "AI 部署模式比較（公有雲/私有雲/邊緣/混合）", "headers": ["部署模式", "代表平台/範例", "優勢", "適用情境", "挑戰"], "rows": [["公有雲 Public Cloud", "AWS、Azure、GCP", "資源彈性擴充、部署速度快、全球節點、按量付費", "新創團隊、中大型企業 AI 專案、跨地區部署、GPU 密集訓練", "需關注法規遵循（如 GDPR）、資料主權與供應商鎖定風險"], ["私有雲 Private Cloud", "OpenStack、VMware", "資安風險可控、資料不外流、可依產業法規客製化", "政府、金融、醫療等資料保護要求嚴格領域", "建置與維運成本高、彈性與資源擴展性受限"], ["邊緣運算 Edge Computing", "IoT、手機、車載系統", "即時反應、降低傳輸延遲、提升隱私保護", "工業設備監控、智慧城市、車聯網、邊緣 AI 應用", "運算資源有限、更新與同步需額外設計"], ["混合部署 Hybrid", "雲端＋私有雲＋邊緣組合", "兼顧計算能力、反應速度與資料保護，具彈性", "雲端訓練、邊緣即時推論等多元情境", "系統整合難度高，需良好同步與一致性管理"]]}, {"title": "MLOps 模型監控項目", "headers": ["監控項目", "英文", "說明"], "rows": [["模型漂移", "Model Drift", "模型預測分佈與訓練時期不同，可能表示模型已不再適用"], ["資料漂移", "Data Drift", "輸入資料的統計特徵改變，如欄位分佈或異常比例異常"], ["效能指標", "Performance Metrics", "錯誤率、延遲（Latency）、吞吐量（Throughput）等"]]}, {"title": "成效指標（KPI）三層級", "headers": ["層級", "指標範例"], "rows": [["系統層級", "推論延遲（Latency）、吞吐量（Throughput）、服務可用率（Uptime）、資源使用率（GPU 記憶體）"], ["應用層級", "推薦點擊率（CTR）、預測準確率（Accuracy）、分類 F1-Score、異常偵測精確度"], ["業務層級", "轉換率提升、成本節省、客戶留存率變化、ROI（投資報酬率）"]]}, {"title": "跨部門角色與責任", "headers": ["部門", "參與責任"], "rows": [["業務與行銷部門", "提供需求情境與績效指標，依模型輸出進行策略應用與反饋調整"], ["客服與營運部門", "與客戶接觸最頻繁，回收實際互動案例與異常反應供持續優化"], ["法務與風險部門", "審查資料隱私、模型公平性與風險揭露，建立符合法規的使用框架"], ["資訊部門", "負責部署、權限管理、API 整合與維運支援，確保系統穩定接軌基礎架構"]]}], "terms": [{"term": "資料管線", "en": "Data Pipeline", "def": "串接資料擷取、格式轉換、清理與入庫的流程，確保資料能持續穩定流入模型運行流程。"}, {"term": "資料湖", "en": "Data Lake", "def": "用於儲存大規模非結構化資料的資料儲存環境，與結構化的資料倉儲（Data Warehouse）相對。"}, {"term": "容器化", "en": "Containerization / Docker", "def": "以 Docker 等工具將應用程式與其依賴環境封裝在一起，確保跨平台部署的一致性。"}, {"term": "容器編排", "en": "Kubernetes (K8s)", "def": "管理大量容器的編排工具，負責資源調度、自動擴縮與故障恢復。"}, {"term": "模型服務化", "en": "Model Serving", "def": "以 Flask、FastAPI、TensorFlow Serving 等將模型封裝為 HTTP/REST 推論服務供前端呼叫。"}, {"term": "邊緣運算", "en": "Edge Computing / Edge AI", "def": "在靠近資料來源端的裝置（IoT、手機、車載）上進行模型推論，以降低延遲與頻寬消耗。"}, {"term": "MLOps", "en": "Machine Learning Operations", "def": "DevOps 在 AI 領域的延伸，將模型訓練、測試、部署與監控持續整合與自動化以確保全生命週期一致性。"}, {"term": "持續整合／持續部署", "en": "CI/CD", "def": "將模型開發、測試與部署自動化的流程，提升協作效率並降低人為錯誤。"}, {"term": "藍綠部署", "en": "Blue-Green Deployment", "def": "同時維護新舊兩套環境並切換流量的部署策略，用於降低更新風險，與金絲雀部署（Canary）類似。"}, {"term": "概念/模型漂移", "en": "Concept Drift / Model Drift", "def": "模型預測分佈隨時間與環境改變而與訓練時不同，導致模型不再適用，需監控並觸發再訓練。"}, {"term": "資料漂移", "en": "Data Drift", "def": "輸入資料的統計特徵（如欄位分佈或異常比例）發生改變，可能造成模型效能下降。"}, {"term": "再訓練流程", "en": "Retraining Pipeline", "def": "當監控指標超過觸發門檻（如準確率下降 5%）時自動啟動的模型重新訓練機制。"}]}], "quiz": [{"q": "在進行 AI 建模前，進行「資料標註」的主要目的是？", "options": ["減少資料容量", "強化系統安全性", "讓模型能夠辨識輸入與目標之間的對應關係", "提升資料儲存速度"], "answer": 2, "explain": "資料標註是監督式學習的關鍵步驟，能讓模型理解每筆資料對應的標籤或結果。"}, {"q": "在特徵工程中，進行特徵標準化（如 Z-score 標準化）的主要目的是？", "options": ["增加欄位數量", "提升資料壓縮效率", "將特徵縮放至相同尺度，利於模型學習", "將文字轉換為向量"], "answer": 2, "explain": "許多演算法（如 SVM、KNN）對特徵尺度敏感，標準化有助於提升模型表現與穩定性。"}, {"q": "若某企業的目標是預測顧客是否會流失，最適合選用下列哪一種模型任務？", "options": ["分類任務", "迴歸任務", "生成任務", "分群任務"], "answer": 0, "explain": "顧客流失通常為「會/不會」的二元分類問題，適合使用分類模型如 Logistic Regression、決策樹等。"}, {"q": "關於模型選擇，下列哪一項敘述較為正確？", "options": ["模型越複雜越好", "模型應優先考慮開發成本與可部署性", "只要準確率高就不需考慮其他指標", "模型無須考慮資料量大小"], "answer": 1, "explain": "選擇模型需考量資料特性、開發時間、計算成本與後續維運難度，不應一味追求複雜度。"}, {"q": "下列哪一種資料前處理技術主要用來處理缺失值？", "options": ["資料增強", "標準化", "插補法", "降維"], "answer": 2, "explain": "插補法（Imputation）可用平均數、中位數、眾數或模型預測方式填補缺失欄位，常用於資料清理階段。"}, {"q": "在設計 AI 應用系統架構時，使用容器技術（如 Docker）的主要優點為？", "options": ["加快資料標註速度", "提升 API 回應速度", "促進模型跨平台部署與環境一致性", "減少模型所需參數量"], "answer": 2, "explain": "容器技術可封裝應用與其依賴環境，確保模型從開發到部署保持一致。"}, {"q": "MLOps 的主要目的為何？", "options": ["壓縮模型參數", "簡化使用者介面設計", "實現 AI 模型的自動化開發、部署與持續維運流程", "將 AI 模型嵌入硬體晶片"], "answer": 2, "explain": "MLOps 結合 DevOps 與機器學習，可實現模型生命週期的持續整合、測試與監控。"}, {"q": "在邊緣運算架構中，AI 模型的推論通常會發生在哪裡？", "options": ["雲端 GPU 伺服器", "終端裝置本地端", "資料標註平台", "資料儲存庫"], "answer": 1, "explain": "邊緣 AI 將模型部署至如手機、攝影機、感測器等裝置上，提升即時性並減少延遲。"}, {"q": "持續監控部署後 AI 模型效能的主要目的為何？", "options": ["減少資料備份空間", "提升 UI 使用效率", "偵測模型概念漂移與效能下降", "強化模型壓縮效果"], "answer": 2, "explain": "模型部署後若輸入資料特性改變，將可能導致預測不準，故需建立監控機制。"}, {"q": "在 AI 系統整合過程中，為確保模型可與業務流程無縫對接，通常需要哪種角色協作？", "options": ["社群經營人員", "資料標註員", "產品經理與工程人員", "硬體維修技術員"], "answer": 2, "explain": "產品經理負責需求對齊與驗證場景，工程人員負責將模型封裝並整合至應用流程。"}]}], "cards": [{"term": "命名實體辨識", "en": "NER", "def": "辨識並標註文本中的人名、地名、組織等實體的 NLP 任務，常用於法律與醫療文本結構化。", "sec": "3.1", "chap": "3"}, {"term": "詞嵌入", "en": "Word Embedding", "def": "將每個詞彙轉換為含語意資訊的數字向量，使語意相近的詞在向量空間中相互接近。", "sec": "3.1", "chap": "3"}, {"term": "Word2Vec", "en": "Word2Vec", "def": "Google 於 2013 年提出的詞嵌入演算法，透過 CBOW 與 Skip-gram 學習詞彙與上下文關係。", "sec": "3.1", "chap": "3"}, {"term": "自注意力機制", "en": "Self-Attention", "def": "Transformer 的核心機制，讓模型處理每個詞時同時考量序列中所有其他詞的關聯，捕捉長距離依賴。", "sec": "3.1", "chap": "3"}, {"term": "Transformer", "en": "Transformer", "def": "2017 年提出、摒棄遞迴結構並以自注意力與全平行架構為核心的深度學習架構，為現代 NLP 主流基礎。", "sec": "3.1", "chap": "3"}, {"term": "遮蔽語言模型", "en": "MLM", "def": "BERT 的預訓練任務，遮蔽部分詞後讓模型預測，藉此學習雙向上下文理解能力。", "sec": "3.1", "chap": "3"}, {"term": "預訓練再微調", "en": "Pre-train and Fine-tune", "def": "先在大規模語料上通用預訓練，再針對特定下游任務微調的主流訓練策略。", "sec": "3.1", "chap": "3"}, {"term": "檢索增強生成", "en": "RAG", "def": "結合外部知識檢索與語言生成的方法，在生成過程中整合外部資料以提升準確性。", "sec": "3.1", "chap": "3"}, {"term": "低秩自適應", "en": "LoRA", "def": "對原始模型添加輕量級低秩參數進行快速微調的技術，可大幅降低運算與儲存需求。", "sec": "3.1", "chap": "3"}, {"term": "模型幻覺", "en": "Model Hallucination", "def": "生成模型產出看似流暢卻虛假、誤導或完全虛構、不基於事實的內容之現象。", "sec": "3.1", "chap": "3"}, {"term": "卷積神經網路", "en": "CNN", "def": "電腦視覺核心深度學習架構，透過卷積層自動學習邊緣、紋理等影像特徵，減少手動特徵設計。", "sec": "3.2", "chap": "3"}, {"term": "殘差連接", "en": "Residual Connection", "def": "ResNet 引入的結構，藉跳接解決深層網路梯度消失問題，使網路深度可達 152 層。", "sec": "3.2", "chap": "3"}, {"term": "YOLO", "en": "You Only Look Once", "def": "一種基於迴歸的物件偵測模型，同時預測邊界框與類別，速度快適合即時應用。", "sec": "3.2", "chap": "3"}, {"term": "U-Net", "en": "U-Net", "def": "具對稱編解碼器與跳躍連接的分割模型，專為醫療影像設計、適合不平衡資料集。", "sec": "3.2", "chap": "3"}, {"term": "交並比", "en": "IOU", "def": "衡量預測分割／偵測區域與真實區域重疊程度的指標，等於交集面積除以聯集面積。", "sec": "3.2", "chap": "3"}, {"term": "Vision Transformer", "en": "ViT", "def": "採用 Transformer 架構處理影像的模型，突破 CNN 在電腦視覺領域的主導地位。", "sec": "3.2", "chap": "3"}, {"term": "CLIP", "en": "Contrastive Language-Image Pre-Training", "def": "OpenAI 提出的多模態模型，將影像與文字嵌入同一語意空間以達成跨模態理解。", "sec": "3.2", "chap": "3"}, {"term": "Segment Anything Model", "en": "SAM", "def": "Meta 推出的通用影像分割模型，具高普適性與泛化能力，可處理各種未知分割任務。", "sec": "3.2", "chap": "3"}, {"term": "資料漂移", "en": "Data Drift", "def": "隨環境或攝影條件變動導致輸入資料分佈改變，可能造成已部署模型效能下降或失效。", "sec": "3.2", "chap": "3"}, {"term": "資料擴增", "en": "Data Augmentation", "def": "透過翻轉、旋轉、裁剪、色彩偏移等變換增加資料多樣性，提升泛化能力並對抗過擬合。", "sec": "3.2", "chap": "3"}, {"term": "生成式 AI", "en": "Generative AI", "def": "能根據輸入產生全新內容（文本、圖像、音訊、影片、程式碼）的 AI 技術，核心為學習資料分佈並生成新樣本。", "sec": "3.3", "chap": "3"}, {"term": "鑑別式 AI", "en": "Discriminative AI", "def": "著重分類、辨識或預測，學習資料特徵以歸類或分配標籤的 AI，如圖像分類與語音辨識。", "sec": "3.3", "chap": "3"}, {"term": "對抗生成網路", "en": "GAN", "def": "由生成器與判別器對抗訓練的生成模型，可從噪聲生成高寫實資料，但訓練不穩定易模式崩潰。", "sec": "3.3", "chap": "3"}, {"term": "變分自編碼器", "en": "VAE", "def": "利用變分推斷學習資料潛在分佈、從噪聲重建內容的生成模型，是早期生成式 AI 的代表。", "sec": "3.3", "chap": "3"}, {"term": "擴散模型", "en": "Diffusion Models", "def": "透過逐步去噪過程從隨機噪聲生成高品質、細節豐富圖像的生成模型，如 Stable Diffusion。", "sec": "3.3", "chap": "3"}, {"term": "大型語言模型", "en": "LLM", "def": "基於 Transformer、以大規模語料訓練的龐大參數語言模型，具強大語言理解與生成能力。", "sec": "3.3", "chap": "3"}, {"term": "提示工程", "en": "Prompt Engineering", "def": "設計與優化輸入提示以引導生成模型在語氣、風格、格式等層面產出理想結果的技能。", "sec": "3.3", "chap": "3"}, {"term": "深偽", "en": "Deepfake", "def": "結合圖像生成與語音合成製作的偽造影音，常被濫用於詐騙與假訊息散播，需技術偵測與法律規範。", "sec": "3.3", "chap": "3"}, {"term": "文字轉語音", "en": "TTS", "def": "將文字輸入轉換為自然語音輸出的生成技術，應用於虛擬助理、有聲書與配音等。", "sec": "3.3", "chap": "3"}, {"term": "人類回饋強化學習", "en": "RLHF", "def": "結合人類回饋的強化學習，用於模型對齊與防濫用，強化生成內容的安全性與合規性。", "sec": "3.3", "chap": "3"}, {"term": "多模態 AI", "en": "Multimodal AI", "def": "能同時處理並整合文字、影像、語音、感測訊號等兩種以上資料模態的人工智慧系統。", "sec": "3.4", "chap": "3"}, {"term": "模態", "en": "Modality", "def": "資料的型態類別，如文字、影像、語音／音訊、感測器資料，各具獨特結構與特徵表達方式。", "sec": "3.4", "chap": "3"}, {"term": "跨模態表示學習", "en": "Cross-modal Embeddings", "def": "將不同模態資料映射至相同語意空間，使模型能比較、關聯或互相翻譯不同模態輸入的技術。", "sec": "3.4", "chap": "3"}, {"term": "對比學習", "en": "Contrastive Learning", "def": "透過拉近相符樣本、推遠不符樣本的訓練方式學習表示，CLIP 即以此對齊圖文嵌入向量。", "sec": "3.4", "chap": "3"}, {"term": "感測融合", "en": "Sensor Fusion", "def": "整合多種異質感測器資料並進行同步與特徵對齊的技術，分早期融合與晚期融合。", "sec": "3.4", "chap": "3"}, {"term": "視覺問答", "en": "VQA", "def": "Visual Question Answering，依據影像內容回答自然語言問題的多模態任務，由 BLIP 等模型強化。", "sec": "3.4", "chap": "3"}, {"term": "BLIP", "en": "Bootstrapping Language-Image Pre-training", "def": "Salesforce 發表的多模態模型，強化圖文問答與生成任務，支援圖片與文字雙向理解。", "sec": "3.4", "chap": "3"}, {"term": "Flamingo", "en": "Flamingo", "def": "DeepMind 提出、具少樣本學習能力的多模態模型，可快速適應新的圖文任務。", "sec": "3.4", "chap": "3"}, {"term": "自我監督學習", "en": "Self-supervised Learning", "def": "利用大規模未標註資料進行預訓練的學習方式，可降低標註成本並強化跨模態對齊與泛化。", "sec": "3.4", "chap": "3"}, {"term": "知識蒸餾", "en": "Knowledge Distillation", "def": "將大模型知識遷移至小模型的壓縮技術，與剪枝、量化並用以利於邊緣設備部署。", "sec": "3.4", "chap": "3"}, {"term": "現況流程／理想流程", "en": "As-Is / To-Be", "def": "現況流程是組織目前實際的作業方式，理想流程是導入 AI 後期望達到的最佳狀態，兩者差距即為導入價值所在。", "sec": "4.1", "chap": "4"}, {"term": "投資報酬率", "en": "ROI", "def": "衡量投資回報是否值得的指標，公式為（投資回報-投資成本）/投資成本×100%。", "sec": "4.1", "chap": "4"}, {"term": "淨現值", "en": "NPV", "def": "將未來現金流折現後總和減去初期投資的財務模型，為正值代表專案具投資價值。", "sec": "4.1", "chap": "4"}, {"term": "回收期", "en": "Payback Period", "def": "投資成本完全回收所需的時間，等於初期投資除以每年淨現金流，越短代表風險越低。", "sec": "4.1", "chap": "4"}, {"term": "資料治理", "en": "Data Governance", "def": "確保資料正確性、可追溯性與權限控管，並建立資料標準、管理制度與負責單位的機制，是 AI 成功導入的關鍵前提。", "sec": "4.1", "chap": "4"}, {"term": "可解釋 AI", "en": "XAI (Explainable AI)", "def": "能讓使用者理解模型如何做出預測或決策的技術方法與工具，用以增強信任、偵測偏誤並支援合規審核。", "sec": "4.1", "chap": "4"}, {"term": "風險矩陣", "en": "Risk Matrix", "def": "將風險發生可能性（Likelihood）與影響程度（Impact）交叉評估的二維視覺化工具，常見 3x3 或 5x5 格式。", "sec": "4.1", "chap": "4"}, {"term": "概念驗證", "en": "POC (Proof of Concept)", "def": "在正式導入前以小範圍、可控且具代表性的情境進行測試，驗證 AI 應用的技術可行性與商業價值。", "sec": "4.1", "chap": "4"}, {"term": "數位成熟度", "en": "Digital Maturity", "def": "評估組織現行作業流程是否已具備數位化基礎（如 ERP、CRM、資料倉儲），以支撐 AI 模型所需的可靠數據。", "sec": "4.1", "chap": "4"}, {"term": "甘特圖", "en": "Gantt Chart", "def": "以時間為橫軸、任務為縱軸的視覺化排程工具，能呈現各工作時間安排、重疊區段與關鍵路徑。", "sec": "4.2", "chap": "4"}, {"term": "工作分解結構", "en": "WBS (Work Breakdown Structure)", "def": "由上而下將複雜任務分割為可控子任務的方法，每一子任務定義責任、成果、資源與時長。", "sec": "4.2", "chap": "4"}, {"term": "短衝", "en": "Sprint", "def": "Scrum 中固定週期（通常 1-4 週）的開發節奏，團隊針對特定目標進行開發、測試與整合。", "sec": "4.2", "chap": "4"}, {"term": "敏捷開發", "en": "Agile Development", "def": "強調迭代、快速回應變化的開發方法論，Scrum 為其最常見的框架，適合需求多變的 AI 專案。", "sec": "4.2", "chap": "4"}, {"term": "產品待辦清單", "en": "Product Backlog", "def": "由 Product Owner 維護的產品開發待辦事項清單，依業務價值排定優先順序。", "sec": "4.2", "chap": "4"}, {"term": "關鍵路徑", "en": "Critical Path", "def": "專案中決定整體最短完成時間的任務序列，任一環節延遲都會影響整個專案時程。", "sec": "4.2", "chap": "4"}, {"term": "服務水準協議", "en": "SLA (Service Level Agreement)", "def": "與第三方供應商約定服務品質標準的合約，例如系統延遲超標由供應商賠償。", "sec": "4.2", "chap": "4"}, {"term": "可交付成果", "en": "Increment", "def": "每次 Sprint 結束時產出的完整、可運作的產品版本。", "sec": "4.2", "chap": "4"}, {"term": "資料漂移", "en": "Data Drift", "def": "模型運行過程中輸入資料的分佈發生變化，使預測結果逐漸偏離原有準確度。", "sec": "4.3", "chap": "4"}, {"term": "概念漂移", "en": "Concept Drift", "def": "資料背後的潛在關係或模式隨時間改變，導致模型預測不再準確，常見於長期運行的模型。", "sec": "4.3", "chap": "4"}, {"term": "過擬合", "en": "Overfitting", "def": "模型過度學習訓練資料中的噪聲與細節，在訓練資料表現好但對未見資料缺乏泛化能力。", "sec": "4.3", "chap": "4"}, {"term": "歐盟通用資料保護規則", "en": "GDPR", "def": "全球資料隱私保護的指標性法規，適用於處理歐盟居民個資的所有企業，賦予資料主體刪除權、可攜權等多項權利。", "sec": "4.3", "chap": "4"}, {"term": "台灣個人資料保護法", "en": "PDPA", "def": "規範在台灣境內或涉及台灣居民個資的處理，要求收集使用須具特定目的、取得明確同意並履行通知與保護義務。", "sec": "4.3", "chap": "4"}, {"term": "資料保護影響評估", "en": "DPIA", "def": "當資料處理可能對資料主體權利與自由造成高風險時，依 GDPR 必須進行的風險評估程序。", "sec": "4.3", "chap": "4"}, {"term": "公平性", "en": "Fairness", "def": "AI 應用須積極避免偏見、確保模型在不同群體間不產生歧視的倫理原則。", "sec": "4.3", "chap": "4"}, {"term": "問責性", "en": "Accountability", "def": "企業須建立清晰的 AI 治理責任體系，為模型設計、部署與運營確立明確責任人並能即時修正錯誤。", "sec": "4.3", "chap": "4"}, {"term": "機器學習運維", "en": "MLOps", "def": "將機器學習開發與營運整合的最佳實踐，自動化模型建置、部署、監控與修正，支援漂移監控與自動重新訓練。", "sec": "4.3", "chap": "4"}, {"term": "AI 治理", "en": "AI Governance", "def": "貫穿規劃、開發、測試、部署到運維全生命週期的制度化風險治理架構，維持 AI 系統長期的合規性與穩定性。", "sec": "4.3", "chap": "4"}, {"term": "垃圾進垃圾出", "en": "GIGO (Garbage In, Garbage Out)", "def": "指輸入資料品質低劣將導致模型輸出不可靠，強調資料品質對 AI 模型的決定性影響。", "sec": "5.1", "chap": "5"}, {"term": "插值法", "en": "Interpolation", "def": "一種缺失值填補方法，依據已知資料點推估中間缺失的數值。", "sec": "5.1", "chap": "5"}, {"term": "Z-score 標準化", "en": "Z-score / Standardization", "def": "將數值轉換為平均數 0、標準差 1 的分布，適合需計算梯度的模型如線性迴歸與 SVM。", "sec": "5.1", "chap": "5"}, {"term": "四分位距", "en": "IQR (Interquartile Range)", "def": "以資料第一與第三四分位數之間距離篩選異常值的統計方法。", "sec": "5.1", "chap": "5"}, {"term": "獨熱編碼", "en": "One-hot Encoding", "def": "將類別變數轉換為多個二進位欄位的編碼方式，適用於無序分類變數。", "sec": "5.1", "chap": "5"}, {"term": "標籤編碼", "en": "Label Encoding", "def": "將類別轉換為整數編碼的方式，適用於有順序意義的有序類別。", "sec": "5.1", "chap": "5"}, {"term": "主成分分析", "en": "PCA (Principal Component Analysis)", "def": "藉由找出資料中方差最大的方向來降維，保留大部分資訊以提升效能與視覺化。", "sec": "5.1", "chap": "5"}, {"term": "自動化機器學習", "en": "AutoML", "def": "透過智慧算法自動完成特徵生成、篩選與模型建構，降低技術門檻並加速資料科學流程。", "sec": "5.1", "chap": "5"}, {"term": "隨機森林", "en": "Random Forest", "def": "結合多棵決策樹進行平均或投票的集成學習法，可提升準確度並降低過度擬合風險。", "sec": "5.1", "chap": "5"}, {"term": "K 最近鄰", "en": "KNN (K-Nearest Neighbors)", "def": "依鄰近資料點的類別進行預測的演算法，簡單直觀但對資料量與維度敏感。", "sec": "5.1", "chap": "5"}, {"term": "Transformer 架構", "en": "Transformer", "def": "以自注意力（Self-Attention）機制建構語意關聯的深度學習架構，為 NLP 主流，代表模型如 BERT、GPT。", "sec": "5.1", "chap": "5"}, {"term": "擴散模型", "en": "Diffusion Models", "def": "透過逐步加入與移除噪聲學習資料反向轉換過程的生成模型，圖像品質佳但速度慢、成本高。", "sec": "5.1", "chap": "5"}, {"term": "資料管線", "en": "Data Pipeline", "def": "串接資料擷取、格式轉換、清理與入庫的流程，確保資料能持續穩定流入模型運行流程。", "sec": "5.2", "chap": "5"}, {"term": "資料湖", "en": "Data Lake", "def": "用於儲存大規模非結構化資料的資料儲存環境，與結構化的資料倉儲（Data Warehouse）相對。", "sec": "5.2", "chap": "5"}, {"term": "容器化", "en": "Containerization / Docker", "def": "以 Docker 等工具將應用程式與其依賴環境封裝在一起，確保跨平台部署的一致性。", "sec": "5.2", "chap": "5"}, {"term": "容器編排", "en": "Kubernetes (K8s)", "def": "管理大量容器的編排工具，負責資源調度、自動擴縮與故障恢復。", "sec": "5.2", "chap": "5"}, {"term": "模型服務化", "en": "Model Serving", "def": "以 Flask、FastAPI、TensorFlow Serving 等將模型封裝為 HTTP/REST 推論服務供前端呼叫。", "sec": "5.2", "chap": "5"}, {"term": "邊緣運算", "en": "Edge Computing / Edge AI", "def": "在靠近資料來源端的裝置（IoT、手機、車載）上進行模型推論，以降低延遲與頻寬消耗。", "sec": "5.2", "chap": "5"}, {"term": "MLOps", "en": "Machine Learning Operations", "def": "DevOps 在 AI 領域的延伸，將模型訓練、測試、部署與監控持續整合與自動化以確保全生命週期一致性。", "sec": "5.2", "chap": "5"}, {"term": "持續整合／持續部署", "en": "CI/CD", "def": "將模型開發、測試與部署自動化的流程，提升協作效率並降低人為錯誤。", "sec": "5.2", "chap": "5"}, {"term": "藍綠部署", "en": "Blue-Green Deployment", "def": "同時維護新舊兩套環境並切換流量的部署策略，用於降低更新風險，與金絲雀部署（Canary）類似。", "sec": "5.2", "chap": "5"}, {"term": "概念/模型漂移", "en": "Concept Drift / Model Drift", "def": "模型預測分佈隨時間與環境改變而與訓練時不同，導致模型不再適用，需監控並觸發再訓練。", "sec": "5.2", "chap": "5"}, {"term": "資料漂移", "en": "Data Drift", "def": "輸入資料的統計特徵（如欄位分佈或異常比例）發生改變，可能造成模型效能下降。", "sec": "5.2", "chap": "5"}, {"term": "再訓練流程", "en": "Retraining Pipeline", "def": "當監控指標超過觸發門檻（如準確率下降 5%）時自動啟動的模型重新訓練機制。", "sec": "5.2", "chap": "5"}]};</script>
+<script>
+/* =================== App State =================== */
+const store = (()=>{ let mem={}; try{const t='__t';localStorage.setItem(t,'1');localStorage.removeItem(t);
+  return {get:k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},
+          set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){mem[k]=v}}};}
+  catch(e){return {get:k=>mem[k]??null,set:(k,v)=>{mem[k]=v}};} })();
+
+const SECTIONS=[]; DATA.chapters.forEach(c=>c.sections.forEach(s=>SECTIONS.push({...s,chap:c.chapter,chapTitle:c.title})));
+const CHAP_CLASS={"3":"c3","4":"c4","5":"c5"};
+const CHAP_COLOR={"3":"#2563eb","4":"#0e9384","5":"#7c3aed"};
+
+const state={
+  mode:'notes',
+  activeSec: SECTIONS[0].id,
+  cardFilter:'all', cardIdx:0, cardFlip:false, order:[],
+  known: new Set(store.get('known')||[]),
+  quiz:null
+};
+
+const $=s=>document.querySelector(s);
+const main=$('#main');
+document.getElementById('subtitle').textContent=DATA.meta.subtitle;
+
+/* =================== Tabs =================== */
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>setMode(t.dataset.mode)));
+function setMode(m){
+  state.mode=m;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.mode===m));
+  $('#searchCard').style.display = m==='notes' ? '' : 'none';
+  renderNav(); render(); closeMenu();
+}
+
+/* =================== Sidebar nav =================== */
+function renderNav(){
+  const nav=$('#nav');
+  if(state.mode==='cards'){
+    nav.innerHTML = navCards();
+    $('#sideStat').innerHTML = sideStatCards();
+  } else if(state.mode==='quiz'){
+    nav.innerHTML = navQuiz();
+    $('#sideStat').innerHTML = `<b>30</b> 題官方練習・3 章<br>作答後立即顯示解析`;
+  } else {
+    nav.innerHTML = DATA.chapters.map(c=>`
+      <div class="nav-chap">
+        <div class="nav-chap-h"><span class="chap-badge ${CHAP_CLASS[c.chapter]}">${c.chapter}</span>第${c.chapter==='3'?'三':c.chapter==='4'?'四':'五'}章　${c.title}</div>
+        ${c.sections.map(s=>`<button class="nav-sec ${s.id===state.activeSec?'active':''}" data-sec="${s.id}">
+            <span class="num">${s.id}</span><span>${s.title}</span></button>`).join('')}
+      </div>`).join('');
+    nav.querySelectorAll('.nav-sec').forEach(b=>b.addEventListener('click',()=>{state.activeSec=b.dataset.sec; render(); closeMenu(); window.scrollTo({top:0,behavior:'smooth'});}));
+    const total=SECTIONS.length, idx=SECTIONS.findIndex(s=>s.id===state.activeSec)+1;
+    $('#sideStat').innerHTML=`目前進度　<b>${idx} / ${total}</b> 節<br>共 <b>9</b> 節重點精華`;
+  }
+}
+function navCards(){
+  const groups=[['all','全部','🃏'],['3','第三章','📗'],['4','第四章','📘'],['5','第五章','📙']];
+  return `<div style="padding:4px 4px 8px">${groups.map(([k,t,ic])=>{
+    const n = k==='all'?DATA.cards.length:DATA.cards.filter(c=>c.chap===k).length;
+    return `<button class="nav-sec ${state.cardFilter===k?'active':''}" data-cf="${k}">
+      <span class="num">${ic}</span><span>${t}</span><span style="margin-left:auto;font-size:12px;color:var(--ink-mute)">${n}</span></button>`;
+  }).join('')}</div>`;
+}
+function sideStatCards(){
+  const deck=cardDeck(); const known=deck.filter(c=>state.known.has(c.term)).length;
+  return `已記住　<b>${known} / ${deck.length}</b> 張<br>點卡片翻面看定義`;
+}
+function navQuiz(){
+  const items=[['all','全部混合','30'],['3','第三章 技術應用','10'],['4','第四章 導入規劃','10'],['5','第五章 系統部署','10']];
+  return `<div style="padding:4px 4px 8px">${items.map(([k,t,n])=>
+    `<button class="nav-sec ${state.quiz&&state.quiz.key===k?'active':''}" data-qz="${k}">
+      <span class="num">${k==='all'?'★':k}</span><span>${t}</span><span style="margin-left:auto;font-size:12px;color:var(--ink-mute)">${n}題</span></button>`).join('')}</div>`;
+}
+
+/* =================== Render dispatch =================== */
+function render(){
+  if(state.mode==='notes') renderNotes();
+  else if(state.mode==='cards') renderCards();
+  else renderQuiz();
+  // bind nav clicks for cards/quiz
+  document.querySelectorAll('[data-cf]').forEach(b=>b.addEventListener('click',()=>{state.cardFilter=b.dataset.cf;state.cardIdx=0;state.cardFlip=false;state.order=[];renderNav();renderCards();closeMenu();}));
+  document.querySelectorAll('[data-qz]').forEach(b=>b.addEventListener('click',()=>{startQuiz(b.dataset.qz);closeMenu();}));
+}
+
+/* =================== Notes =================== */
+function esc(s){return (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+function renderNotes(){
+  const i=SECTIONS.findIndex(s=>s.id===state.activeSec);
+  const s=SECTIONS[i], prev=SECTIONS[i-1], next=SECTIONS[i+1];
+  const chCh = s.chap==='3'?'三':s.chap==='4'?'四':'五';
+  let h=`<div class="panel fade-in">
+    <div class="sec-head">
+      <span class="sec-eyebrow" style="color:${CHAP_COLOR[s.chap]};background:${CHAP_COLOR[s.chap]}1a">第${chCh}章　${esc(s.chapTitle)}</span>
+      <h2>${esc(s.id)}　${esc(s.title)}</h2>
+      <div class="sec-summary">${esc(s.summary)}</div>
+    </div>`;
+
+  h+=`<div class="block-label"><span class="bar"></span>重點精華</div><div class="kp-grid">`;
+  h+=s.keypoints.map(k=>`<div class="kp"><h4><span class="dot"></span>${esc(k.heading)}</h4><p>${esc(k.detail)}</p></div>`).join('');
+  h+=`</div>`;
+
+  if(s.tables&&s.tables.length){
+    h+=`<div class="block-label teal"><span class="bar"></span>關鍵對照表</div>`;
+    s.tables.forEach(t=>{
+      const cols=t.headers.length;
+      h+=`<div class="tbl-wrap"><table class="t"><caption>${esc(t.title)}</caption><thead><tr>${t.headers.map(x=>`<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>`;
+      t.rows.forEach(r=>{const cells=[];for(let c=0;c<cols;c++)cells.push(`<td>${esc(r[c]!=null?String(r[c]):'')}</td>`);h+=`<tr>${cells.join('')}</tr>`;});
+      h+=`</tbody></table></div>`;
+    });
+  }
+
+  h+=`<div class="block-label amber"><span class="bar"></span>必背術語</div><div class="term-grid">`;
+  h+=s.terms.map(t=>`<div class="term"><div><div class="tk">${esc(t.term)}${t.en?` <span class="te">${esc(t.en)}</span>`:''}</div><div class="td">${esc(t.def)}</div></div></div>`).join('');
+  h+=`</div>`;
+
+  h+=`<div class="sec-nav">
+    ${prev?`<button data-go="${prev.id}"><span class="lbl">← 上一節 ${prev.id}</span><span class="ttl">${esc(prev.title)}</span></button>`:`<button disabled><span class="lbl">　</span><span class="ttl">已是第一節</span></button>`}
+    ${next?`<button class="right" data-go="${next.id}"><span class="lbl">下一節 ${next.id} →</span><span class="ttl">${esc(next.title)}</span></button>`:`<button class="right" disabled><span class="lbl">　</span><span class="ttl">已是最後一節</span></button>`}
+  </div></div>`;
+  main.innerHTML=h;
+  main.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>{state.activeSec=b.dataset.go;renderNav();renderNotes();window.scrollTo({top:0,behavior:'smooth'});}));
+}
+
+/* =================== Search =================== */
+const searchInput=$('#search'), searchResults=$('#searchResults');
+let idxData=null;
+function buildIndex(){idxData=[];SECTIONS.forEach(s=>{
+  idxData.push({sec:s.id,title:s.title,type:'節',text:s.title+' '+s.summary});
+  s.keypoints.forEach(k=>idxData.push({sec:s.id,title:s.title,type:'重點',text:k.heading+' '+k.detail,label:k.heading}));
+  s.terms.forEach(t=>idxData.push({sec:s.id,title:s.title,type:'術語',text:t.term+' '+t.en+' '+t.def,label:t.term+(t.en?` (${t.en})`:'')}));
+});}
+function hl(txt,q){const i=txt.toLowerCase().indexOf(q.toLowerCase());if(i<0)return esc(txt.slice(0,60));
+  const a=Math.max(0,i-18);return (a>0?'…':'')+esc(txt.slice(a,i))+'<b>'+esc(txt.slice(i,i+q.length))+'</b>'+esc(txt.slice(i+q.length,i+q.length+34))+'…';}
+searchInput.addEventListener('input',()=>{
+  const q=searchInput.value.trim(); if(!idxData)buildIndex();
+  if(!q){searchResults.innerHTML='';return;}
+  const ql=q.toLowerCase();
+  const hits=idxData.filter(d=>d.text.toLowerCase().includes(ql)).slice(0,12);
+  if(!hits.length){searchResults.innerHTML=`<div class="sr-empty">找不到「${esc(q)}」</div>`;return;}
+  searchResults.innerHTML=hits.map((d,i)=>`<div class="sr-item" data-sr="${d.sec}">
+    <div class="sr-tag">${d.sec}・${d.type}</div>
+    <div class="sr-txt">${d.label?esc(d.label)+'：':''}${hl(d.text,q)}</div></div>`).join('');
+  searchResults.querySelectorAll('[data-sr]').forEach(el=>el.addEventListener('click',()=>{
+    if(state.mode!=='notes')setMode('notes');
+    state.activeSec=el.dataset.sr;renderNav();renderNotes();searchInput.value='';searchResults.innerHTML='';closeMenu();window.scrollTo({top:0,behavior:'smooth'});
+  }));
+});
+
+/* =================== Flashcards =================== */
+function cardDeck(){return state.cardFilter==='all'?DATA.cards:DATA.cards.filter(c=>c.chap===state.cardFilter);}
+function ensureOrder(){const deck=cardDeck();if(!state.order||state.order.length!==deck.length)state.order=deck.map((_,i)=>i);}
+function renderCards(){
+  ensureOrder();
+  const deck=cardDeck();
+  if(!deck.length){main.innerHTML='<div class="panel">沒有卡片</div>';return;}
+  if(state.cardIdx>=deck.length)state.cardIdx=0;
+  const card=deck[state.order[state.cardIdx]];
+  const known=state.known.has(card.term);
+  const knownCount=deck.filter(c=>state.known.has(c.term)).length;
+  const pct=Math.round(knownCount/deck.length*100);
+  main.innerHTML=`<div class="panel fade-in">
+    <div class="fc-toolbar">
+      <div><div style="font-size:18px;font-weight:800">重點閃卡</div>
+        <div style="font-size:13px;color:var(--ink-mute)">點擊卡片翻面・共 ${deck.length} 張術語卡</div></div>
+      <div class="fc-tools">
+        <button class="btn-ghost" id="shuffle">🔀 洗牌</button>
+        <button class="btn-ghost" id="resetKnown">↺ 重設</button>
+      </div>
+    </div>
+    <div class="fc-stage">
+      <div class="flashcard ${state.cardFlip?'flip':''}" id="flashcard">
+        <div class="fc-face fc-front">
+          <div class="meta">${card.sec}</div>
+          ${card.en?`<div class="term-en">${esc(card.en)}</div>`:''}
+          <div class="term-zh">${esc(card.term)}</div>
+          <div class="hint">👆 點擊看定義</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="lab">定義</div>
+          <div class="def">${esc(card.def)}</div>
+          <div class="src">出自 ${card.sec} ${esc(secTitle(card.sec))}</div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-mark">
+      <button class="mk again ${!known&&state.cardFlip?'':''}" id="mkAgain">🔁 再複習</button>
+      <button class="mk know ${known?'on':''}" id="mkKnow">✓ 我記得了</button>
+    </div>
+    <div class="fc-progress">
+      <button class="fc-arrow" id="prevCard">‹</button>
+      <div class="fc-count">${state.cardIdx+1} <span>/ ${deck.length}</span></div>
+      <button class="fc-arrow" id="nextCard">›</button>
+    </div>
+    <div class="fc-bar"><i style="width:${pct}%"></i></div>
+    <div style="text-align:center;font-size:12.5px;color:var(--ink-mute);margin-top:10px">已記住 ${knownCount} / ${deck.length}（${pct}%）</div>
+  </div>`;
+  $('#flashcard').addEventListener('click',()=>{state.cardFlip=!state.cardFlip;$('#flashcard').classList.toggle('flip');});
+  $('#prevCard').addEventListener('click',()=>{state.cardIdx=(state.cardIdx-1+deck.length)%deck.length;state.cardFlip=false;renderCards();});
+  $('#nextCard').addEventListener('click',()=>{state.cardIdx=(state.cardIdx+1)%deck.length;state.cardFlip=false;renderCards();});
+  $('#shuffle').addEventListener('click',()=>{for(let i=state.order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[state.order[i],state.order[j]]=[state.order[j],state.order[i]];}state.cardIdx=0;state.cardFlip=false;renderCards();});
+  $('#mkKnow').addEventListener('click',()=>{state.known.add(card.term);store.set('known',[...state.known]);state.cardIdx=(state.cardIdx+1)%deck.length;state.cardFlip=false;renderCards();renderNav();});
+  $('#mkAgain').addEventListener('click',()=>{state.known.delete(card.term);store.set('known',[...state.known]);state.cardIdx=(state.cardIdx+1)%deck.length;state.cardFlip=false;renderCards();renderNav();});
+  $('#resetKnown').addEventListener('click',()=>{if(confirm('清除此分類的「已記住」標記？')){deck.forEach(c=>state.known.delete(c.term));store.set('known',[...state.known]);renderCards();renderNav();}});
+}
+function secTitle(id){const s=SECTIONS.find(x=>x.id===id);return s?s.title:'';}
+
+/* =================== Quiz =================== */
+function allQuestions(){const a=[];DATA.chapters.forEach(c=>c.quiz.forEach((q,i)=>a.push({...q,chap:c.chapter})));return a;}
+function startQuiz(key){
+  let qs = key==='all'? allQuestions() : DATA.chapters.find(c=>c.chapter===key).quiz.map(q=>({...q,chap:key}));
+  qs=qs.map(q=>({...q})); // copy
+  state.quiz={key, qs, idx:0, answers:new Array(qs.length).fill(null), done:false};
+  renderNav(); renderQuiz();
+}
+function renderQuiz(){
+  const q=state.quiz;
+  if(!q){ // intro
+    main.innerHTML=`<div class="panel fade-in"><div class="quiz-intro">
+      <h2>✏️ 自我測驗</h2>
+      <p>取自學習指引各章「練習評量」共 30 題，作答後立即批改並顯示官方解析。選擇一個測驗範圍開始：</p>
+      <div class="quiz-modes">
+        ${quizCard('all','★','全部混合','三章合計 30 題','linear-gradient(135deg,#2563eb,#0e9384)')}
+        ${quizCard('3','3','AI 相關技術應用','NLP・CV・生成式・多模態','#2563eb')}
+        ${quizCard('4','4','AI 導入評估規劃','評估・規劃・風險管理','#0e9384')}
+        ${quizCard('5','5','AI 技術應用與部署','資料・模型・系統部署','#7c3aed')}
+      </div></div></div>`;
+    main.querySelectorAll('[data-qstart]').forEach(b=>b.addEventListener('click',()=>startQuiz(b.dataset.qstart)));
+    return;
+  }
+  if(q.done){return renderResult();}
+  const cur=q.qs[q.idx], picked=q.answers[q.idx];
+  const answered=picked!==null;
+  const pct=Math.round((q.idx)/q.qs.length*100);
+  const chTag = q.key==='all'?`第${cur.chap==='3'?'三':cur.chap==='4'?'四':'五'}章`:'';
+  let h=`<div class="panel fade-in quiz-run">
+    <div class="q-top"><span class="q-counter">第 ${q.idx+1} 題 / 共 ${q.qs.length} 題</span>
+      ${chTag?`<span class="q-chaptag">${chTag}</span>`:''}</div>
+    <div class="q-bar"><i style="width:${Math.round((q.idx+(answered?1:0))/q.qs.length*100)}%"></i></div>
+    <div class="q-stem">${esc(cur.q)}</div>
+    <div class="q-opts">`;
+  const keys=['A','B','C','D'];
+  cur.options.forEach((opt,i)=>{
+    let cls='opt'; let mark='';
+    if(answered){cls+=' locked';
+      if(i===cur.answer){cls+=' correct';mark='<span class="mark">✓</span>';}
+      else if(i===picked){cls+=' wrong';mark='<span class="mark">✗</span>';}
+    }
+    h+=`<button class="${cls}" data-opt="${i}" ${answered?'disabled':''}>
+      <span class="key">${keys[i]}</span><span class="otext">${esc(opt)}</span>${mark}</button>`;
+  });
+  h+=`</div>`;
+  if(answered){
+    const ok=picked===cur.answer;
+    h+=`<div class="q-explain show ${ok?'ok':'no'}">
+      <div class="eh">${ok?'✓ 答對了':'✗ 答錯了，正確答案為 '+keys[cur.answer]}</div>
+      <div class="et">${esc(cur.explain)}</div></div>`;
+  }
+  h+=`<div class="q-foot">
+    <button class="q-quit" id="quitQuiz">✕ 結束測驗</button>
+    <button class="btn-primary" id="nextQ" ${answered?'':'disabled'}>${q.idx===q.qs.length-1?'看成績 →':'下一題 →'}</button>
+  </div></div>`;
+  main.innerHTML=h;
+  main.querySelectorAll('[data-opt]').forEach(b=>b.addEventListener('click',()=>{
+    if(state.quiz.answers[q.idx]!==null)return;
+    state.quiz.answers[q.idx]=+b.dataset.opt; renderQuiz();
+  }));
+  $('#nextQ').addEventListener('click',()=>{
+    if(state.quiz.answers[q.idx]===null)return;
+    if(q.idx===q.qs.length-1){state.quiz.done=true;renderResult();}
+    else{state.quiz.idx++;renderQuiz();}
+  });
+  $('#quitQuiz').addEventListener('click',()=>{if(confirm('確定結束本次測驗？')){state.quiz=null;renderNav();renderQuiz();}});
+}
+function quizCard(key,ic,title,desc,color){
+  return `<button class="qmode" data-qstart="${key}">
+    <div class="qm-ic" style="background:${color}">${ic}</div>
+    <h3>${title}</h3><p>${desc}</p></button>`;
+}
+function renderResult(){
+  const q=state.quiz;
+  const total=q.qs.length;
+  let correct=0; q.qs.forEach((x,i)=>{if(q.answers[i]===x.answer)correct++;});
+  const pct=Math.round(correct/total*100);
+  const r=78, circ=2*Math.PI*r, off=circ*(1-pct/100);
+  const color = pct>=80?'#16a34a':pct>=60?'#2563eb':'#d97706';
+  const msg = pct>=80?'表現優異，繼續保持！':pct>=60?'及格水準，再加強弱項。':'多複習錯題，重新挑戰！';
+  let h=`<div class="panel fade-in result">
+    <div class="score-ring">
+      <svg width="172" height="172"><circle cx="86" cy="86" r="${r}" fill="none" stroke="#eef2f7" stroke-width="13"/>
+      <circle cx="86" cy="86" r="${r}" fill="none" stroke="${color}" stroke-width="13" stroke-linecap="round"
+        stroke-dasharray="${circ}" stroke-dashoffset="${off}" style="transition:stroke-dashoffset 1s ease"/></svg>
+      <div class="pct"><b style="color:${color}">${pct}%</b><span>答對 ${correct} / ${total}</span></div>
+    </div>
+    <h2>${msg}</h2>
+    <div class="sub">本次測驗範圍：${q.key==='all'?'全部混合（30 題）':'第'+(q.key==='3'?'三':q.key==='4'?'四':'五')+'章（10 題）'}</div>
+    <div class="result-actions">
+      <button class="btn-primary" id="retry">↻ 再測一次</button>
+      <button class="btn-ghost" id="otherQuiz">選擇其他範圍</button>
+    </div>`;
+  const wrong=q.qs.map((x,i)=>({x,i})).filter(o=>q.answers[o.i]!==o.x.answer);
+  const keys=['A','B','C','D'];
+  if(wrong.length){
+    h+=`<div class="review"><h3>📝 錯題複習（${wrong.length} 題）</h3>`;
+    wrong.forEach(({x,i})=>{
+      h+=`<div class="rv-item"><div class="rv-q">${i+1}. ${esc(x.q)}</div>
+        <div class="rv-line rv-yours"><span class="lk">你的答案：</span>${q.answers[i]!=null?keys[q.answers[i]]+'. '+esc(x.options[q.answers[i]]):'未作答'}</div>
+        <div class="rv-line rv-correct"><span class="lk">正確答案：</span>${keys[x.answer]}. ${esc(x.options[x.answer])}</div>
+        <div class="rv-exp">${esc(x.explain)}</div></div>`;
+    });
+    h+=`</div>`;
+  } else {
+    h+=`<div class="review"><h3>🎉 全部答對，太厲害了！</h3><p style="color:var(--ink-soft);font-size:14px">所有題目均正確，可挑戰其他章節或全部混合測驗。</p></div>`;
+  }
+  h+=`</div>`;
+  main.innerHTML=h;
+  $('#retry').addEventListener('click',()=>startQuiz(q.key));
+  $('#otherQuiz').addEventListener('click',()=>{state.quiz=null;renderNav();renderQuiz();window.scrollTo({top:0,behavior:'smooth'});});
+}
+
+/* =================== Mobile menu =================== */
+const aside=$('#aside'), scrim=$('#scrim');
+$('#menuBtn').addEventListener('click',()=>{aside.classList.add('open');scrim.classList.add('show');});
+function closeMenu(){aside.classList.remove('open');scrim.classList.remove('show');}
+scrim.addEventListener('click',closeMenu);
+
+/* =================== Init =================== */
+renderNav(); render();
+</script>
+</body>
+</html>
