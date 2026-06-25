@@ -370,9 +370,16 @@ function renderNav(){
   if(state.mode==='cards'){
     nav.innerHTML = navCards();
     $('#sideStat').innerHTML = sideStatCards();
+    nav.querySelectorAll('[data-cf]').forEach(b=>b.addEventListener('click',()=>{
+      state.cardFilter=b.dataset.cf; state.cardIdx=0; state.cardFlip=false; state.order=[];
+      renderNav(); renderCards(); closeMenu();
+    }));
   } else if(state.mode==='quiz'){
     nav.innerHTML = navQuiz();
     $('#sideStat').innerHTML = `<b>30</b> 題官方練習・3 章<br>作答後立即顯示解析`;
+    nav.querySelectorAll('[data-qz]').forEach(b=>b.addEventListener('click',()=>{
+      startQuiz(b.dataset.qz); closeMenu();
+    }));
   } else {
     nav.innerHTML = DATA.chapters.map(c=>`
       <div class="nav-chap">
@@ -380,7 +387,7 @@ function renderNav(){
         ${c.sections.map(s=>`<button class="nav-sec ${s.id===state.activeSec?'active':''}" data-sec="${s.id}">
             <span class="num">${s.id}</span><span>${s.title}</span></button>`).join('')}
       </div>`).join('');
-    nav.querySelectorAll('.nav-sec').forEach(b=>b.addEventListener('click',()=>{state.activeSec=b.dataset.sec; render(); closeMenu(); window.scrollTo({top:0,behavior:'smooth'});}));
+    nav.querySelectorAll('.nav-sec').forEach(b=>b.addEventListener('click',()=>{state.activeSec=b.dataset.sec; renderNav(); renderNotes(); closeMenu(); window.scrollTo({top:0,behavior:'smooth'});}));
     const total=SECTIONS.length, idx=SECTIONS.findIndex(s=>s.id===state.activeSec)+1;
     $('#sideStat').innerHTML=`目前進度　<b>${idx} / ${total}</b> 節<br>共 <b>9</b> 節重點精華`;
   }
@@ -409,9 +416,6 @@ function render(){
   if(state.mode==='notes') renderNotes();
   else if(state.mode==='cards') renderCards();
   else renderQuiz();
-  // bind nav clicks for cards/quiz
-  document.querySelectorAll('[data-cf]').forEach(b=>b.addEventListener('click',()=>{state.cardFilter=b.dataset.cf;state.cardIdx=0;state.cardFlip=false;state.order=[];renderNav();renderCards();closeMenu();}));
-  document.querySelectorAll('[data-qz]').forEach(b=>b.addEventListener('click',()=>{startQuiz(b.dataset.qz);closeMenu();}));
 }
 
 /* =================== Notes =================== */
